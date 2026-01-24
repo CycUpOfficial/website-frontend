@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { Footer, Header } from "@/components/atomic/organisms";
+import "@/styles/globals.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,12 +15,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased`}>{children}</body>
+      <body className={`${poppins.className} antialiased`}>
+        <Header />
+        <main className="py-[80px]">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
