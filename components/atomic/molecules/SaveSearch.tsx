@@ -1,0 +1,20 @@
+"use client";
+
+import { BookmarkSVG } from "@/components/icons";
+import { Button, Icon } from "../atoms";
+
+const SaveSearch = () => {
+  return (
+    <Button
+      onClick={() => {}}
+      className="cursor-pointer bg-white flex gap-1 rounded-[10px] items-center text-[#4F4A4A] font-medium text-xl px-5 h-[45px]"
+    >
+      <Icon className="w-[12px] h-[16px]">
+        <BookmarkSVG width="100%" heigth="100%" />
+      </Icon>
+      Save Search
+    </Button>
+  );
+};
+
+export default SaveSearch;
