@@ -1,0 +1,24 @@
+@import "./resets.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+}
+
+input {
+  outline: 0;
+  font-family: "IranYekan", system-ui, sans-serif !important;
+}
+
+input:focus-visible {
+  outline: 0;
+}
