@@ -13,7 +13,7 @@ const ProductDescription = ({ description }: IProductDescriptionProps) => {
       </Text>
       <Link
         href="/"
-        className="bg-secondary text-white rounded-[10px] font-medium py-1.5 w-[130px]"
+        className="bg-secondary text-white text-xl rounded-[10px] font-medium py-1.5 px-8"
       >
         Claim
       </Link>

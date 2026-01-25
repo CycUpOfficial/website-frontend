@@ -8,8 +8,9 @@ export default async function ProductPage({
 }) {
   const { slug } = await params;
   const product = sampleProducts.find((product) => product.slug === slug);
-  const similarProducts = [{}];
-
+  const similarProducts = sampleProducts.filter(
+    (prod) => prod.id !== product!.id,
+  );
   return (
     <SingleProductTemplate
       product={product!}

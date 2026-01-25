@@ -1,3 +1,4 @@
+import { SampleProduct } from "@/types";
 import { Text } from "../atoms";
 import {
   Sidebar,
@@ -10,7 +11,7 @@ import {
 interface IHomePageTemplate {
   title?: string;
   description?: string;
-  products: IProductListingGridProps["products"];
+  products: SampleProduct[];
   columns?: number;
   gap?: IProductListingGridProps["gap"];
   className?: string;

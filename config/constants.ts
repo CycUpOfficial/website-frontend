@@ -5,7 +5,20 @@ export const sampleProducts = [
     title: "Winter Jackets",
     description:
       "A breathtaking view of the mountains at dawn with golden light painting the peaks.",
-    image: "/winter-jacket.png",
+    images: [
+      {
+        src: "/winter-jacket.png",
+        alt: "Winter Jackets product image",
+      },
+      {
+        src: "/winter-jacket.png",
+        alt: "Winter Jackets product image",
+      },
+      {
+        src: "/winter-jacket.png",
+        alt: "Winter Jackets product image",
+      },
+    ],
     price: 29.99,
     location: "TYS, 78A",
     owner: {
@@ -20,7 +33,12 @@ export const sampleProducts = [
     slug: "nike-sneakers",
     title: "Nike Sneakers",
     description: "Modern city buildings showcasing contemporary design.",
-    image: "/nike-sneakers.png",
+    images: [
+      {
+        src: "/nike-sneakers.png",
+        alt: "Nike Sneakers product image",
+      },
+    ],
     price: 89.99,
     location: "TYS, 78A",
     owner: {
@@ -36,7 +54,12 @@ export const sampleProducts = [
     title: "Single Sofa",
     description:
       "The rhythmic dance of ocean waves captured in perfect timing.",
-    image: "/sofa.png",
+    images: [
+      {
+        src: "/sofa.png",
+        alt: "Single Sofa product image",
+      },
+    ],
     price: 45.0,
     location: "TYS, 78A",
     owner: {
@@ -51,7 +74,12 @@ export const sampleProducts = [
     slug: "hall-center-table",
     title: "Hall Center Table",
     description: "A serene woodland trail covered in autumn leaves.",
-    image: "/table.png",
+    images: [
+      {
+        src: "/table.png",
+        alt: "Hall Center Table product image",
+      },
+    ],
     price: 24.99,
     location: "TYS, 78A",
     owner: {
@@ -67,7 +95,12 @@ export const sampleProducts = [
     title: "Single Size Bed",
     description:
       "Golden sand dunes stretching endlessly under a clear blue sky.",
-    image: "/bed.png",
+    images: [
+      {
+        src: "/bed.png",
+        alt: "Single Size Bed product image",
+      },
+    ],
     price: 55.0,
     location: "TYS, 78A",
     owner: {
@@ -82,7 +115,12 @@ export const sampleProducts = [
     slug: "sweat-pants",
     title: "Sweat Pants",
     description: "Stars illuminating the darkness.",
-    image: "/sweatpants.png",
+    images: [
+      {
+        src: "/sweatpants.png",
+        alt: "Sweat Pants product image",
+      },
+    ],
     price: 34.99,
     location: "TYS, 78A",
     owner: {
@@ -98,7 +136,12 @@ export const sampleProducts = [
     title: "Sneakers",
     description:
       "Crystal clear water cascading down moss-covered rocks in a tropical paradise.",
-    image: "/sneakers.png",
+    images: [
+      {
+        src: "/sneakers.png",
+        alt: "Sneakers product image",
+      },
+    ],
     price: 120.0,
     location: "TYS, 78A",
     owner: {
@@ -113,7 +156,12 @@ export const sampleProducts = [
     slug: "full-set-sound-system",
     title: "Full Set Sound System",
     description: "Delicate pink petals in spring bloom.",
-    image: "/sound-system.png",
+    images: [
+      {
+        src: "/sound-system.png",
+        alt: "Full Set Sound System product image",
+      },
+    ],
     price: 28.0,
     location: "TYS, 78A",
     owner: {
@@ -128,7 +176,12 @@ export const sampleProducts = [
     slug: "hp-elitebook",
     title: "HP Elitebook",
     description: "Majestic snow-capped mountains reaching toward the clouds.",
-    image: "/hp-elitebook.png",
+    images: [
+      {
+        src: "/hp-elitebook.png",
+        alt: "HP Elitebook product image",
+      },
+    ],
     price: 65.0,
     location: "TYS, 78A",
     owner: {
@@ -143,7 +196,12 @@ export const sampleProducts = [
     slug: "living-room-carpet",
     title: "Living Room Carpet",
     description: "Boats resting peacefully as the sun dips below the horizon.",
-    image: "/carpet.png",
+    images: [
+      {
+        src: "/carpet.png",
+        alt: "Living Room Carpet product image",
+      },
+    ],
     price: 95.0,
     location: "TYS, 78A",
     owner: {
@@ -158,7 +216,12 @@ export const sampleProducts = [
     slug: "headphone",
     title: "Headphone",
     description: "Lush green meadows stretching between rolling hills.",
-    image: "/headphones.png",
+    images: [
+      {
+        src: "/headphones.png",
+        alt: "Headphone product image",
+      },
+    ],
     price: 32.0,
     location: "TYS, 78A",
     owner: {
@@ -174,7 +237,12 @@ export const sampleProducts = [
     title: "Samsung Phone",
     description:
       "The urban landscape comes alive at night with a symphony of lights.",
-    image: "/samsung-phone.png",
+    images: [
+      {
+        src: "/samsung-phone.png",
+        alt: "Samsung Phone product image",
+      },
+    ],
     price: 378.0,
     location: "TYS, 78A",
     owner: {

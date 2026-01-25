@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import NextImage from "next/image";
 
 export interface ImageProps {
   src: string;
@@ -20,7 +19,7 @@ const Image = ({ src, alt, aspectRatio = "auto", className }: ImageProps) => {
       className={cn(
         "relative w-full overflow ",
         aspectClasses[aspectRatio],
-        className
+        className,
       )}
     >
       <img

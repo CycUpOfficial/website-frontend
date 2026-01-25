@@ -10,6 +10,7 @@ import FilterItem from "./FilterItem";
 import OwnerInfo from "./OwnerInfo";
 import ProductDescription from "./ProductDescription";
 import Searchbar from "./Searchbar";
+import SimilarProduct from "./SimilarProduct";
 
 export {
   Logo,
@@ -24,6 +25,7 @@ export {
   Searchbar,
   SaveSearch,
   ProductDescription,
+  SimilarProduct,
 };
 
 import type { ProductCardProps } from "./ProductCard";

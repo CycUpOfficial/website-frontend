@@ -3,12 +3,13 @@ import { Image, Text } from "../atoms";
 import Location from "./Location";
 import Price from "./Price";
 import Link from "next/link";
+import { IProductImages } from "@/types";
 
 export interface ProductCardProps {
   id: string;
   title: string;
   description?: string;
-  image: string;
+  images: IProductImages[];
   price: number;
   location: string;
   className?: string;
@@ -18,7 +19,7 @@ export interface ProductCardProps {
 const ProductCard = ({
   title,
   description,
-  image,
+  images,
   price,
   location,
   slug,
@@ -28,11 +29,11 @@ const ProductCard = ({
     <Link
       href={`/product/${slug}`}
       className={cn(
-        "break-inside-avoid mb-4 overflow-hidden rounded-lg bg-transparent transition-shadow cursor-pointer hover:shadow-md ",
+        "break-inside-avoid mb-4 flex-shrink-0 overflow-hidden rounded-lg bg-transparent transition-shadow cursor-pointer hover:shadow-md ",
         className,
       )}
     >
-      <Image src={image} alt={title} />
+      <Image src={images[0].src} alt={title} />
       <div className="p-4 space-y-2">
         <Price price={price} />
         <Text

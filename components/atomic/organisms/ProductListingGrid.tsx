@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
 import { ProductCard, ProductCardProps } from "../molecules";
 import MasonryGrid, { IMasonryGridProps } from "./MasonryGrid";
+import { SampleProduct } from "@/types";
 
 export interface IProductListingGridProps {
-  products: ProductCardProps[];
+  products: SampleProduct[];
   columns?: IMasonryGridProps["columns"];
   gap?: IMasonryGridProps["gap"];
   className?: string;

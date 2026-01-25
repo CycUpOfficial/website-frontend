@@ -1,5 +1,5 @@
 import { SampleProduct } from "@/types";
-import { Container, Product } from "../organisms";
+import { Container, Product, SimilarProductsWrapper } from "../organisms";
 
 interface ISingleProductTemplateProps {
   product: SampleProduct;
@@ -11,9 +11,9 @@ const SingleProductTemplate = ({
   similarProducts,
 }: ISingleProductTemplateProps) => {
   return (
-    <Container>
+    <Container className="flex flex-col w-full gap-[60px]">
       <Product product={product} />
-      {/* <SimilarProductWrapper products={similarProducts} /> */}
+      <SimilarProductsWrapper products={similarProducts} />
     </Container>
   );
 };
