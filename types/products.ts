@@ -9,7 +9,7 @@ export interface IProduct {
   address: string;
   cityId: string;
   city: string;
-  itemType: "selling" | "renting";
+  itemType: "selling" | "lending" | "giveaway";
   sellingPrice: number;
   lendingPrice: number;
   rentUnit: "month" | "week" | "day" | "hour";
@@ -58,6 +58,8 @@ export interface ICreateProductInput {
   condition: "used" | "new";
   description: string;
   address: string;
+  cityId: string;
+  itemType: "selling" | "lending" | "giveaway";
   sellingPrice?: number;
   lendingPrice?: number;
   rentUnit?: "month" | "week" | "day" | "hour";

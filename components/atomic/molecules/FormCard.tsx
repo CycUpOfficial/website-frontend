@@ -38,6 +38,7 @@ const FormCard = ({
 
       <form
         action={action}
+        encType="multipart/form-data"
         className="space-y-4 shadow-md w-full px-[220px] py-[100px] rounded-[20px]"
       >
         {children}
