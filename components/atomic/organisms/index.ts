@@ -10,6 +10,12 @@ import SimilarProductsWrapper from "./SimilarProductsWrapper";
 import Container from "./Container";
 import Product from "./Product";
 import PhotoUploadField from "./PhotoUploadField";
+import AuthRegisterForm from "./AuthRegisterForm";
+import AuthLoginForm from "./AuthLoginForm";
+import AuthForgotPasswordForm from "./AuthForgotPasswordForm";
+import AuthResetPasswordForm from "./AuthResetPasswordForm";
+import AuthModal from "./AuthModal";
+import Modal from "./Modal";
 
 export {
   Header,
@@ -24,6 +30,12 @@ export {
   Product,
   SimilarProductsWrapper,
   PhotoUploadField,
+  AuthRegisterForm,
+  AuthLoginForm,
+  AuthForgotPasswordForm,
+  AuthResetPasswordForm,
+  AuthModal,
+  Modal,
 };
 
 import type { IMasonryGridProps } from "./MasonryGrid";

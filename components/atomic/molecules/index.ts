@@ -14,6 +14,7 @@ import SimilarProduct from "./SimilarProduct";
 import PriceTypeToggle from "./PriceTypeToggle";
 import FormCard from "./FormCard";
 import FormField from "./FormField";
+import AuthFormCard from "./AuthFormCard";
 
 export {
   Logo,
@@ -32,6 +33,7 @@ export {
   PriceTypeToggle,
   FormCard,
   FormField,
+  AuthFormCard,
 };
 
 import type { ProductCardProps } from "./ProductCard";

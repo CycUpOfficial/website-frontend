@@ -1,3 +1,5 @@
+import type { FormEventHandler, ReactNode } from "react";
+
 import { cn } from "@/lib/utils";
 import { Text } from "../atoms";
 
@@ -6,9 +8,11 @@ interface IFormCarProps {
   description?: string;
   message?: string; // Global success/error message
   isSuccess?: boolean;
-  children: React.ReactNode; // The inputs go here
-  action: (payload: FormData) => void; // The server action connection
+  children: ReactNode; // The inputs go here
+  action?: (payload: FormData) => void; // The server action connection
+  onSubmit?: FormEventHandler<HTMLFormElement>;
   className?: string;
+  formClassName?: string;
 }
 const FormCard = ({
   title,
@@ -17,7 +21,9 @@ const FormCard = ({
   isSuccess,
   children,
   action,
+  onSubmit,
   className,
+  formClassName,
 }: IFormCarProps) => {
   return (
     <div className={cn("bg-white rounded-lg p-6 w-full mx-auto", className)}>
@@ -38,7 +44,11 @@ const FormCard = ({
 
       <form
         action={action}
-        className="space-y-4 shadow-md w-full px-[220px] py-[100px] rounded-[20px]"
+        onSubmit={onSubmit}
+        className={cn(
+          "space-y-4 shadow-md w-full px-[220px] py-[100px] rounded-[20px]",
+          formClassName,
+        )}
       >
         {children}
       </form>
