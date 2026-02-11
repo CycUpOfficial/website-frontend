@@ -8,6 +8,7 @@ import Label from "./Label";
 import Select from "./Select";
 import FileInput from "./FileInput";
 import PhotoSlot from "./PhotoSlot";
+import Radio from "./Radio";
 
 export {
   Button,
@@ -20,4 +21,5 @@ export {
   Select,
   FileInput,
   PhotoSlot,
+  Radio,
 };

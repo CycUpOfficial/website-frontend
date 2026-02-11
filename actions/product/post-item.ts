@@ -11,6 +11,7 @@ const schema = z.object({
   priceType: z.enum(["giveaway", "selling", "lending"]),
   // Price is optional if giveaway, coerced to number otherwise
   price: z.coerce.number().optional(),
+  durationRate: z.enum(["minutely", "hourly", "daily", "weekly"]).optional(),
   // ... add other fields: address, city, description, etc.
   // Images are usually handled separately via FormData
 });

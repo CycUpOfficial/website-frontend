@@ -6,9 +6,10 @@ import { useFormStatus } from "react-dom";
 import { createPostItem } from "@/actions";
 import { cn } from "@/lib/utils";
 
-import { FormCard, FormField } from "../molecules";
-import { Button, FileInput, Input, Select, Text, Textarea } from "../atoms";
+import { FormCard, FormField, NegotiationRadio } from "../molecules";
+import { Button, Input, Select, Textarea } from "../atoms";
 import PhotoUploadField from "./PhotoUploadField";
+import PostPurposeSection from "./PostPurposeSection";
 
 interface INewItemFormProps {
   type: "donate" | "post";
@@ -155,6 +156,12 @@ const NewItemForm = ({ type, className }: INewItemFormProps) => {
           hasError={!!state?.errors?.description}
         />
       </FormField>
+
+      <PostPurposeSection />
+
+      <div className="w-full text-center px-8 my-12">
+        <NegotiationRadio />
+      </div>
 
       {/* Submit */}
       <div className="mt-8">
