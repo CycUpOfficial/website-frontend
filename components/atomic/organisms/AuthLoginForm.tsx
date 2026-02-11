@@ -5,6 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 import { loginUser } from "@/services";
+import { setAuthSession } from "@/lib/auth-session";
 import { Button, Input, Text } from "../atoms";
 import { AuthFormCard, FormField } from "../molecules";
 
@@ -31,6 +32,10 @@ const AuthLoginForm = ({
 
     const response = await loginUser({ email, password });
     if (response.success) {
+      setAuthSession({
+        authenticated: true,
+        userId: response.data?.userId,
+      });
       setIsSuccess(true);
       setMessage("Login successful.");
     } else {

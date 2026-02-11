@@ -37,8 +37,6 @@ async function requestJson<T>(
       },
       credentials: "include",
     });
-    console.log("🚀 ~ requestJson ~ response:", response);
-
     let payload: any = null;
     try {
       payload = await response.json();

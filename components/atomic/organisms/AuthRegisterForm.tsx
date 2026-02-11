@@ -32,7 +32,6 @@ const AuthRegisterForm = ({ onLogin }: AuthRegisterFormProps) => {
     setIsSuccess(undefined);
 
     const response = await registerUser({ email });
-    console.log("🚀 ~ handleRegister ~ response:", response);
     if (response.success) {
       setIsSuccess(true);
       setMessage(
