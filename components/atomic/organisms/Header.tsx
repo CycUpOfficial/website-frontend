@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { clearAuthSession, getAuthSession } from "@/lib/auth-session";
+import { getAuthSession } from "@/lib/auth-session";
 import { ProfileSVG } from "@/components/icons";
 import { Logo, Searchbar } from "../molecules";
 import AuthModal, { type AuthView } from "./AuthModal";
-import { logoutUser } from "@/services";
+import { Button, Icon } from "../atoms";
 
 interface IHeaderProps {
   classname?: string;
@@ -22,6 +21,7 @@ const Header = ({ classname }: IHeaderProps) => {
   const [authView, setAuthView] = useState<AuthView>("login");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const router = useRouter();
 
   const isHomeRoute = pathname === "/";
 
@@ -54,13 +54,6 @@ const Header = ({ classname }: IHeaderProps) => {
     };
   }, []);
 
-  const handleLogout = async () => {
-    setIsLoggingOut(true);
-    await logoutUser();
-    clearAuthSession();
-    setIsLoggingOut(false);
-  };
-
   return (
     <header
       className={cn(
@@ -72,28 +65,24 @@ const Header = ({ classname }: IHeaderProps) => {
       {!isHomeRoute && <Searchbar placeholder="What are you looking for?" />}
 
       <div className="flex items-center justify-between gap-10">
-        <ProfileSVG />
-        {isAuthenticated ? (
-          <button
-            type="button"
-            onClick={handleLogout}
-            disabled={isLoggingOut}
-            className="border border-secondary px-4 py-2 text-sm font-bold text-secondary disabled:opacity-50"
-          >
-            {isLoggingOut ? "Logging out..." : "Log out"}
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => {
-              setAuthView("login");
-              setIsAuthOpen(true);
-            }}
-            className="border border-secondary px-4 py-2 text-sm font-bold text-secondary"
-          >
-            Log in
-          </button>
-        )}
+        <Button
+          type="button"
+          onClick={() => {
+            if (isAuthenticated) {
+              router.push("/profile");
+              return;
+            }
+            setAuthView("login");
+            setIsAuthOpen(true);
+          }}
+          className="flex items-center"
+          aria-label={isAuthenticated ? "Go to profile" : "Open login modal"}
+        >
+          <Icon>
+            <ProfileSVG />
+          </Icon>
+        </Button>
+
         <Link
           className="bg-secondary px-4 py-2 text-sm font-bold text-white"
           href="/product/new"

@@ -53,9 +53,6 @@ const AuthLoginForm = ({
       isSuccess={isSuccess}
       onSubmit={handleLogin}
     >
-      <Text type="p" className="text-sm text-gray-600">
-        Log in with your university email and password.
-      </Text>
       <FormField htmlFor="email" required>
         <Input
           id="email"
@@ -81,9 +78,9 @@ const AuthLoginForm = ({
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50"
+        className="w-fit flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary/90 disabled:opacity-50"
       >
-        {isSubmitting ? "Logging in..." : "Log in"}
+        {isSubmitting ? "Logging in..." : "Submit"}
       </Button>
       <div className="space-y-2 text-sm text-center text-gray-600">
         {onForgotPassword ? (

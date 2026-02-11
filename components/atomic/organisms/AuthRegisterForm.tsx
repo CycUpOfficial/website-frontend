@@ -77,9 +77,6 @@ const AuthRegisterForm = ({ onLogin }: AuthRegisterFormProps) => {
     if (step === "done") {
       return (
         <div className="space-y-4 text-center">
-          <Text type="p" className="text-gray-700">
-            Your account is verified. Please log in to continue.
-          </Text>
           {onLogin ? (
             <button
               type="button"
@@ -103,9 +100,6 @@ const AuthRegisterForm = ({ onLogin }: AuthRegisterFormProps) => {
     if (step === "verify") {
       return (
         <>
-          <Text type="p" className="text-sm text-gray-600">
-            Enter the PIN sent to your email and set your password.
-          </Text>
           {pinHint && (
             <div className="text-sm text-green-700 bg-green-50 px-3 py-2 rounded">
               PIN code: {pinHint}
@@ -156,9 +150,6 @@ const AuthRegisterForm = ({ onLogin }: AuthRegisterFormProps) => {
 
     return (
       <>
-        <Text type="p" className="text-sm text-gray-600">
-          Use your Finnish university email to receive a verification PIN.
-        </Text>
         <FormField htmlFor="email" required>
           <Input
             id="email"
@@ -173,7 +164,7 @@ const AuthRegisterForm = ({ onLogin }: AuthRegisterFormProps) => {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50"
+          className="w-full flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary/90 disabled:opacity-50"
         >
           {isSubmitting ? "Sending PIN..." : "Send verification PIN"}
         </Button>

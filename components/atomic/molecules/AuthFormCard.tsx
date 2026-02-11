@@ -1,7 +1,7 @@
 import type { FormEventHandler, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
-import FormCard from "./FormCard";
+import { Text } from "../atoms";
 
 interface AuthFormCardProps {
   title: string;
@@ -23,19 +23,25 @@ const AuthFormCard = ({
   formClassName,
 }: AuthFormCardProps) => {
   return (
-    <FormCard
-      title={title}
-      message={message}
-      isSuccess={isSuccess}
+    <form
       onSubmit={onSubmit}
-      className={cn("max-w-2xl", className)}
-      formClassName={cn(
-        "space-y-4 w-full rounded-[20px] border border-gray-100 bg-white px-6 py-8 shadow-sm",
+      className={cn(
+        "space-y-4 w-full px-[220px] py-[100px] rounded-[20px]",
         formClassName,
       )}
     >
+      <Text type="h3" className="text-[40px] font-bold text-primary w-fit">
+        {title}
+      </Text>
+      {message && (
+        <div
+          className={`p-3 rounded mb-4 text-sm ${isSuccess ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}
+        >
+          {message}
+        </div>
+      )}
       {children}
-    </FormCard>
+    </form>
   );
 };
 

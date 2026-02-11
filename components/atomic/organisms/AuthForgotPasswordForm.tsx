@@ -48,9 +48,6 @@ const AuthForgotPasswordForm = ({
       isSuccess={isSuccess}
       onSubmit={handleRequest}
     >
-      <Text type="p" className="text-sm text-gray-600">
-        Enter your university email to receive a reset link.
-      </Text>
       <FormField htmlFor="email" required>
         <Input
           id="email"
@@ -65,7 +62,7 @@ const AuthForgotPasswordForm = ({
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-secondary hover:bg-secondary/90 disabled:opacity-50"
+        className="w-full flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary/90 disabled:opacity-50"
       >
         {isSubmitting ? "Sending link..." : "Send reset link"}
       </Button>
