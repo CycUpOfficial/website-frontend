@@ -9,6 +9,7 @@ import CategoriesList from "./CategoriesList";
 import SimilarProductsWrapper from "./SimilarProductsWrapper";
 import Container from "./Container";
 import Product from "./Product";
+import PhotoUploadField from "./PhotoUploadField";
 
 export {
   Header,
@@ -22,6 +23,7 @@ export {
   CategoriesList,
   Product,
   SimilarProductsWrapper,
+  PhotoUploadField,
 };
 
 import type { IMasonryGridProps } from "./MasonryGrid";

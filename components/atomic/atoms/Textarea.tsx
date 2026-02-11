@@ -1,14 +1,17 @@
-import { forwardRef, InputHTMLAttributes } from "react";
+import { forwardRef, TextareaHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "children"> & {
+type TextareaProps = Omit<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  "children"
+> & {
   hasError?: boolean;
 };
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, hasError, ...props }, ref) => {
     return (
-      <input
+      <textarea
         ref={ref}
         {...props}
         className={cn(
@@ -22,5 +25,5 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   },
 );
 
-Input.displayName = "Input";
-export default Input;
+Textarea.displayName = "Textarea";
+export default Textarea;

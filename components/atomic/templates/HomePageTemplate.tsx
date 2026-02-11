@@ -30,7 +30,7 @@ const HomePageTemplate = ({ products, columns, gap }: IHomePageTemplate) => {
               <Text type="h1" className="font-medium text-xl text-textPrimary">
                 Available Products
               </Text>
-              <span className="px-2 bg-secondary text-white text-sm rounded-[5px] cursor-pointer">
+              <span className="px-2 bg-secondary text-white text-sm rounded-[5px]">
                 Type
               </span>
             </div>

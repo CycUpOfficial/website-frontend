@@ -1,1 +1,3 @@
-export * from "./product";
+import { createPostItem } from "./product/post-item";
+
+export { createPostItem };

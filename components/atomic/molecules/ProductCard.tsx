@@ -29,7 +29,7 @@ const ProductCard = ({
     <Link
       href={`/product/${slug}`}
       className={cn(
-        "break-inside-avoid mb-4 flex-shrink-0 overflow-hidden rounded-lg bg-transparent transition-shadow cursor-pointer hover:shadow-md ",
+        "break-inside-avoid mb-4 flex-shrink-0 inline-block overflow-hidden rounded-lg bg-transparent transition-shadow cursor-pointer hover:shadow-md ",
         className,
       )}
     >
