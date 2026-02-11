@@ -10,7 +10,6 @@ import FilterItem from "./FilterItem";
 import OwnerInfo from "./OwnerInfo";
 import ProductDescription from "./ProductDescription";
 import Searchbar from "./Searchbar";
-import SimilarProduct from "./SimilarProduct";
 import PriceTypeToggle from "./PriceTypeToggle";
 import FormCard from "./FormCard";
 import FormField from "./FormField";
@@ -29,7 +28,6 @@ export {
   Searchbar,
   SaveSearch,
   ProductDescription,
-  SimilarProduct,
   PriceTypeToggle,
   FormCard,
   FormField,
