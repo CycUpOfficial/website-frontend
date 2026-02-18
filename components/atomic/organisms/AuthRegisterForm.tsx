@@ -17,6 +17,7 @@ interface AuthRegisterFormProps {
 const AuthRegisterForm = ({ onLogin }: AuthRegisterFormProps) => {
   const [step, setStep] = useState<RegisterStep>("register");
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [pinCode, setPinCode] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -54,7 +55,10 @@ const AuthRegisterForm = ({ onLogin }: AuthRegisterFormProps) => {
     setMessage(undefined);
     setIsSuccess(undefined);
 
+    console.log(email, pinCode, password, passwordConfirmation);
+
     const response = await verifyUser({
+      username,
       email,
       pinCode,
       password,
@@ -105,6 +109,16 @@ const AuthRegisterForm = ({ onLogin }: AuthRegisterFormProps) => {
               PIN code: {pinHint}
             </div>
           )}
+          <FormField htmlFor="username" required>
+            <Input
+              id="username"
+              name="username"
+              placeholder="Username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              required
+            />
+          </FormField>
           <FormField htmlFor="pinCode" required>
             <Input
               id="pinCode"

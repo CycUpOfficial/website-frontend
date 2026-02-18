@@ -14,6 +14,7 @@ export interface RegisterResponse {
 }
 
 export interface VerifyRequest {
+  username: string;
   email: string;
   pinCode: string;
   password: string;
