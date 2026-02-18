@@ -16,6 +16,7 @@ import AuthForgotPasswordForm from "./AuthForgotPasswordForm";
 import AuthResetPasswordForm from "./AuthResetPasswordForm";
 import AuthModal from "./AuthModal";
 import Modal from "./Modal";
+import PostPurposeSection from "./PostPurposeSection";
 
 export {
   Header,
@@ -36,6 +37,7 @@ export {
   AuthResetPasswordForm,
   AuthModal,
   Modal,
+  PostPurposeSection,
 };
 
 import type { IMasonryGridProps } from "./MasonryGrid";

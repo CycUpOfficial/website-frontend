@@ -10,20 +10,16 @@ interface IFormCarProps {
   isSuccess?: boolean;
   children: ReactNode; // The inputs go here
   action?: (payload: FormData) => void; // The server action connection
-  onSubmit?: FormEventHandler<HTMLFormElement>;
   className?: string;
   formClassName?: string;
 }
 const FormCard = ({
   title,
-  description,
   message,
   isSuccess,
   children,
   action,
-  onSubmit,
   className,
-  formClassName,
 }: IFormCarProps) => {
   return (
     <div className={cn("bg-white rounded-lg p-6 w-full mx-auto", className)}>
@@ -44,11 +40,8 @@ const FormCard = ({
 
       <form
         action={action}
-        onSubmit={onSubmit}
-        className={cn(
-          "space-y-4 shadow-md w-full px-[220px] py-[100px] rounded-[20px]",
-          formClassName,
-        )}
+        encType="multipart/form-data"
+        className="space-y-4 shadow-md w-full px-[220px] py-[100px] rounded-[20px]"
       >
         {children}
       </form>
