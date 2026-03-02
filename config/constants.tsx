@@ -1,3 +1,5 @@
+import { AlertSvg, NewItemSvg, NotifSvg, StoreSvg } from "@/components/icons";
+
 export const sampleProducts = [
   {
     id: "1",
@@ -341,3 +343,18 @@ export const NOTIFICATION_TYPES = {
   PRODUCT_APPROVED: "product_approved",
   SYSTEM: "system",
 } as const;
+
+export const profileItems = [
+  { href: "/profile/listings", label: "My listings", icon: <StoreSvg /> },
+  {
+    href: "/profile/feedback",
+    label: "Feedback & Ratings",
+    icon: <AlertSvg />,
+  },
+  { href: "/product/new", label: "Post an Item", icon: <NewItemSvg /> },
+  {
+    href: "/profile/notifications",
+    label: "Notifications",
+    icon: <NotifSvg />,
+  },
+];

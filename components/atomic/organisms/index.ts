@@ -17,6 +17,11 @@ import AuthResetPasswordForm from "./AuthResetPasswordForm";
 import AuthModal from "./AuthModal";
 import Modal from "./Modal";
 import PostPurposeSection from "./PostPurposeSection";
+import ProfileSidebar from "./ProfileSidebar";
+import ProfileCommonWrapper from "./ProfileCommonWrapper";
+import NotificationsWrapper from "./NotificationsWrapper";
+import FeedbacksWrapper from "./FeedbacksWrapper";
+import ListingsWrapper from "./ListingsWrapper";
 
 export {
   Header,
@@ -38,6 +43,11 @@ export {
   AuthModal,
   Modal,
   PostPurposeSection,
+  ProfileSidebar,
+  ProfileCommonWrapper,
+  NotificationsWrapper,
+  FeedbacksWrapper,
+  ListingsWrapper,
 };
 
 import type { IMasonryGridProps } from "./MasonryGrid";

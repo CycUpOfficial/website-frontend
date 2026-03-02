@@ -1,5 +1,6 @@
 import type {
   ApiResponse,
+  CurrentUser,
   LoginRequest,
   LoginResponse,
   PasswordResetConfirmRequest,
@@ -9,63 +10,7 @@ import type {
   VerifyRequest,
   VerifyResponse,
 } from "@/types";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-const defaultHeaders = {
-  "Content-Type": "application/json",
-};
-
-async function requestJson<T>(
-  path: string,
-  options: RequestInit,
-): Promise<ApiResponse<T>> {
-  if (!API_URL) {
-    return {
-      success: false,
-      data: null as T,
-      error: "API URL is not configured.",
-    };
-  }
-
-  try {
-    const response = await fetch(`${API_URL}${path}`, {
-      ...options,
-      headers: {
-        ...defaultHeaders,
-        ...(options.headers ?? {}),
-      },
-      credentials: "include",
-    });
-    let payload: any = null;
-    try {
-      payload = await response.json();
-    } catch (error) {
-      payload = null;
-    }
-
-    if (!response.ok) {
-      return {
-        success: false,
-        data: null as T,
-        error:
-          payload?.message || `Request failed with status ${response.status}.`,
-      };
-    }
-
-    return {
-      success: true,
-      data: payload as T,
-      message: payload?.message,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      data: null as T,
-      error: error instanceof Error ? error.message : "Network error",
-    };
-  }
-}
+import { requestJson } from "./request";
 
 export async function registerUser(
   input: RegisterRequest,
@@ -115,5 +60,11 @@ export async function confirmPasswordReset(
   return requestJson<{ message?: string }>("/auth/password/reset/confirm", {
     method: "POST",
     body: JSON.stringify(input),
+  });
+}
+
+export async function getCurrentUser(): Promise<ApiResponse<CurrentUser>> {
+  return requestJson<CurrentUser>("/auth/me", {
+    method: "GET",
   });
 }
