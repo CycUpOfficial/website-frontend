@@ -276,20 +276,20 @@ export const footerLinks = [
   {
     title: "About Us",
     links: [
-      { title: "About CycUp", link: "/" },
-      { title: "Terms & Conditions", link: "/" },
-      { title: "Privacy Policy", link: "/" },
+      { title: "About CycUp", link: "/about-cycup" },
+      { title: "Terms & Conditions", link: "/terms-conditions" },
+      { title: "Privacy Policy", link: "/privacy-policy" },
     ],
   },
   {
     title: "Support",
     links: [
-      { title: "support@cycup.fi", link: "/" },
-      { title: "Safety Tips", link: "/" },
-      { title: "How to Giveaway", link: "/" },
-      { title: "How to Sell or Buy", link: "/" },
-      { title: "Contact Us", link: "/" },
-      { title: "FAQ", link: "/" },
+      { title: "support@cycup.fi", link: "mailto:support@cycup.fi" },
+      { title: "Safety Tips", link: "/safety-tips" },
+      { title: "How to Giveaway", link: "/how-to-giveaway" },
+      { title: "How to Sell or Buy", link: "/how-to-sell-or-buy" },
+      { title: "Contact Us", link: "/contact-us" },
+      { title: "FAQ", link: "/faq" },
     ],
   },
   {
