@@ -10,6 +10,20 @@ import SimilarProductsWrapper from "./SimilarProductsWrapper";
 import Container from "./Container";
 import Product from "./Product";
 import PhotoUploadField from "./PhotoUploadField";
+import AuthRegisterForm from "./AuthRegisterForm";
+import AuthLoginForm from "./AuthLoginForm";
+import AuthForgotPasswordForm from "./AuthForgotPasswordForm";
+import AuthResetPasswordForm from "./AuthResetPasswordForm";
+import AuthModal from "./AuthModal";
+import Modal from "./Modal";
+import PostPurposeSection from "./PostPurposeSection";
+import ProfileSidebar from "./ProfileSidebar";
+import ProfileCommonWrapper from "./ProfileCommonWrapper";
+import NotificationsWrapper from "./NotificationsWrapper";
+import FeedbacksWrapper from "./FeedbacksWrapper";
+import ListingsWrapper from "./ListingsWrapper";
+import ProfileSettingsForm from "./ProfileSettingsForm";
+import SavedSearchManager from "./SavedSearchManager";
 
 export {
   Header,
@@ -24,6 +38,20 @@ export {
   Product,
   SimilarProductsWrapper,
   PhotoUploadField,
+  AuthRegisterForm,
+  AuthLoginForm,
+  AuthForgotPasswordForm,
+  AuthResetPasswordForm,
+  AuthModal,
+  Modal,
+  PostPurposeSection,
+  ProfileSidebar,
+  ProfileCommonWrapper,
+  NotificationsWrapper,
+  FeedbacksWrapper,
+  ListingsWrapper,
+  ProfileSettingsForm,
+  SavedSearchManager,
 };
 
 import type { IMasonryGridProps } from "./MasonryGrid";

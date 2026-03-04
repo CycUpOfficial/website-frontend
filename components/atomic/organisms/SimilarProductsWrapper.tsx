@@ -1,6 +1,6 @@
 import { SampleProduct } from "@/types";
 import { Text } from "../atoms";
-import { SimilarProduct } from "../molecules";
+import { ProductCard } from "../molecules";
 
 interface ISimilarProductsWrapperProps {
   products: SampleProduct[];
@@ -16,7 +16,17 @@ const SimilarProductsWrapper = ({ products }: ISimilarProductsWrapperProps) => {
       {products.length > 0 && (
         <div className="overflow-auto w-full flex-nowrap flex gap-10 justify-between py-5">
           {products.map((prod, index) => (
-            <SimilarProduct key={index} product={prod} />
+            <ProductCard
+              key={prod.id ?? index}
+              variant="similar"
+              id={prod.id}
+              title={prod.title}
+              description={prod.description}
+              images={prod.images}
+              price={prod.price}
+              location={prod.location}
+              slug={prod.slug}
+            />
           ))}
         </div>
       )}

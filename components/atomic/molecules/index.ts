@@ -10,10 +10,19 @@ import FilterItem from "./FilterItem";
 import OwnerInfo from "./OwnerInfo";
 import ProductDescription from "./ProductDescription";
 import Searchbar from "./Searchbar";
-import SimilarProduct from "./SimilarProduct";
 import PriceTypeToggle from "./PriceTypeToggle";
 import FormCard from "./FormCard";
 import FormField from "./FormField";
+import AuthFormCard from "./AuthFormCard";
+import NegotiationRadio from "./NegotiationRadio";
+import ProfileSidebarCard from "./ProfileSidebarCard";
+import ProfileUserCard from "./ProfileUserCard";
+import NotificationItemCard from "./NotificationItemCard";
+import FeedbackItemCard from "./FeedbackItemCard";
+import ItemsTypeDropdown from "./ItemsTypeDropdown";
+import CatalogPagination from "./CatalogPagination";
+import FilterOptionGroup from "./FilterOptionGroup";
+import FilterPriceRange from "./FilterPriceRange";
 
 export {
   Logo,
@@ -28,12 +37,22 @@ export {
   Searchbar,
   SaveSearch,
   ProductDescription,
-  SimilarProduct,
   PriceTypeToggle,
   FormCard,
   FormField,
+  AuthFormCard,
+  NegotiationRadio,
+  ProfileSidebarCard,
+  ProfileUserCard,
+  NotificationItemCard,
+  FeedbackItemCard,
+  ItemsTypeDropdown,
+  CatalogPagination,
+  FilterOptionGroup,
+  FilterPriceRange,
 };
 
 import type { ProductCardProps } from "./ProductCard";
+import type { FilterOption } from "./FilterOptionGroup";
 
-export type { ProductCardProps };
+export type { ProductCardProps, FilterOption };

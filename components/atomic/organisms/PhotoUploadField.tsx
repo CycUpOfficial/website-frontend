@@ -28,9 +28,9 @@ const PhotoUploadField = ({
         type="p"
         className="max-w-[550px] text-[20px] text-textSecondary font-normal mb-[30px]"
       >
-        Add at least 1 photo for the item<br></br> Note: the first photo will be
-        set as the featured image.<br></br> You can change the order of the
-        photos: drag your photos in your preferred order
+        Add at least 1 photo for the item (max 3)<br></br> Note: the first photo
+        will be set as the featured image.<br></br> You can change the order of
+        the photos: drag your photos in your preferred order
       </Text>
 
       <PhotoUploader

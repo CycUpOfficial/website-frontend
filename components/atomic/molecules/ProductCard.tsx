@@ -4,6 +4,7 @@ import Location from "./Location";
 import Price from "./Price";
 import Link from "next/link";
 import { IProductImages } from "@/types";
+import NextImage from "next/image";
 
 export interface ProductCardProps {
   id: string;
@@ -14,6 +15,7 @@ export interface ProductCardProps {
   location: string;
   className?: string;
   slug: string;
+  variant?: "grid" | "similar";
 }
 
 const ProductCard = ({
@@ -24,7 +26,49 @@ const ProductCard = ({
   location,
   slug,
   className,
+  variant = "grid",
 }: ProductCardProps) => {
+  if (variant === "similar") {
+    return (
+      <Link
+        href={`/product/${slug}`}
+        className={cn(
+          "flex rounded-[20px] w-[386px] h-[575px] flex-col flex-shrink-0 bg-white shadow-md",
+          className,
+        )}
+      >
+        <div className="relative w-[421px] h-[367px] rounded-[20px]">
+          <NextImage
+            src={images[0].src}
+            alt={images[0].alt}
+            fill
+            className="rounded-[20px] object-cover"
+          />
+        </div>
+        <div className="flex flex-col p-12 mt-11">
+          <Price price={price} />
+          <Text
+            type="h2"
+            className="line-clamp-1 font-medium text-base text-textPrimary"
+          >
+            {title}
+          </Text>
+          {description && (
+            <Text
+              type="p"
+              className="text-[10px] text-textSecondary font-normal"
+            >
+              {description}
+            </Text>
+          )}
+          <div className="flex flex-wrap gap-1.5 pt-2">
+            <Location location={location} />
+          </div>
+        </div>
+      </Link>
+    );
+  }
+
   return (
     <Link
       href={`/product/${slug}`}

@@ -7,8 +7,9 @@ import { createPostItem } from "@/actions";
 import { cn } from "@/lib/utils";
 
 import { FormCard, FormField } from "../molecules";
-import { Button, FileInput, Input, Select, Text, Textarea } from "../atoms";
+import { Button, Input, Select, Textarea } from "../atoms";
 import PhotoUploadField from "./PhotoUploadField";
+import PostPurposeSection from "./PostPurposeSection";
 
 interface INewItemFormProps {
   type: "donate" | "post";
@@ -31,7 +32,13 @@ const SubmitButton = () => {
 
 const NewItemForm = ({ type, className }: INewItemFormProps) => {
   const [state, formAction] = useActionState(createPostItem, null);
-  const [photoFiles, setPhotoFiles] = useState<File[]>([]);
+  const [, setPhotoFiles] = useState<File[]>([]);
+  const purposeDefaultValue =
+    state?.values?.itemType === "selling" ||
+    state?.values?.itemType === "lending" ||
+    state?.values?.itemType === "giveaway"
+      ? state?.values?.itemType
+      : undefined;
 
   return (
     <FormCard
@@ -48,6 +55,7 @@ const NewItemForm = ({ type, className }: INewItemFormProps) => {
           name="title"
           placeholder="Title*"
           required
+          maxLength={100}
           defaultValue={state?.values?.title}
           hasError={!!state?.errors?.title}
         />
@@ -55,91 +63,89 @@ const NewItemForm = ({ type, className }: INewItemFormProps) => {
 
       {/* Category + Brand */}
       <div className="grid grid-cols-2 gap-4">
-        <FormField htmlFor="category" required error={state?.errors?.category}>
+        <FormField
+          htmlFor="categoryId"
+          required
+          error={state?.errors?.categoryId}
+        >
           <Select
-            id="category"
-            name="category"
+            id="categoryId"
+            name="categoryId"
             required
-            defaultValue={state?.values?.category ?? ""}
-            hasError={!!state?.errors?.category}
+            defaultValue={state?.values?.categoryId ?? ""}
+            hasError={!!state?.errors?.categoryId}
           >
             <option value="">Category*</option>
-            <option value="electronics">Electronics</option>
+            <option value="1">Electronics</option>
           </Select>
         </FormField>
 
-        <FormField htmlFor="brand">
+        <FormField
+          htmlFor="brandName"
+          required
+          error={state?.errors?.brandName}
+        >
           <Input
-            id="brand"
-            name="brand"
-            placeholder="Brand"
-            defaultValue={state?.values?.brand}
+            id="brandName"
+            name="brandName"
+            placeholder="Brand name*"
+            required
+            defaultValue={state?.values?.brandName}
+            hasError={!!state?.errors?.brandName}
           />
         </FormField>
       </div>
 
       {/* Type + Condition */}
-      <div className="grid grid-cols-2 gap-4">
-        <FormField htmlFor="type" required error={state?.errors?.type}>
-          <Select
-            id="type"
-            name="type"
-            required
-            defaultValue={state?.values?.type ?? ""}
-            hasError={!!state?.errors?.type}
-          >
-            <option value="">Type*</option>
-            <option value="sell">Sell</option>
-            <option value="donate">Donate</option>
-          </Select>
-        </FormField>
-
-        <FormField
-          htmlFor="condition"
+      <FormField htmlFor="condition" required error={state?.errors?.condition}>
+        <Select
+          id="condition"
+          name="condition"
           required
-          error={state?.errors?.condition}
+          defaultValue={state?.values?.condition ?? ""}
+          hasError={!!state?.errors?.condition}
         >
-          <Select
-            id="condition"
-            name="condition"
-            required
-            defaultValue={state?.values?.condition ?? ""}
-            hasError={!!state?.errors?.condition}
-          >
-            <option value="">Condition*</option>
-            <option value="new">New</option>
-            <option value="used">Used</option>
-          </Select>
-        </FormField>
-      </div>
+          <option value="">Condition*</option>
+          <option value="new">New</option>
+          <option value="used">Used</option>
+        </Select>
+      </FormField>
 
       {/* Address */}
-      <FormField htmlFor="address">
+      <FormField htmlFor="address" required error={state?.errors?.address}>
         <Input
           id="address"
           name="address"
-          placeholder="Address"
+          placeholder="Address*"
+          required
           defaultValue={state?.values?.address}
+          hasError={!!state?.errors?.address}
         />
       </FormField>
 
       {/* City */}
-      <FormField htmlFor="city">
+      <FormField htmlFor="cityId" required error={state?.errors?.cityId}>
         <Input
-          id="city"
-          name="city"
-          placeholder="City"
-          defaultValue={state?.values?.city}
+          id="cityId"
+          name="cityId"
+          type="number"
+          min="1"
+          placeholder="City ID*"
+          required
+          defaultValue={state?.values?.cityId}
+          hasError={!!state?.errors?.cityId}
         />
       </FormField>
 
       <PhotoUploadField
         name="photos"
-        label="Upload Photos (max 4)"
+        label="Upload Photos (max 3)"
         error={state?.errors?.photos}
-        maxPhotos={4}
+        maxPhotos={3}
         onChange={setPhotoFiles}
       />
+
+      <input type="hidden" name="mainPhotoIndex" value="0" />
 
       {/* Description */}
       <FormField
@@ -151,10 +157,17 @@ const NewItemForm = ({ type, className }: INewItemFormProps) => {
           id="description"
           name="description"
           placeholder="Description*"
+          maxLength={1000}
           defaultValue={state?.values?.description}
           hasError={!!state?.errors?.description}
         />
       </FormField>
+
+      <PostPurposeSection
+        errors={state?.errors}
+        values={state?.values}
+        defaultValue={purposeDefaultValue}
+      />
 
       {/* Submit */}
       <div className="mt-8">

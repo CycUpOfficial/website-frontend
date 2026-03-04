@@ -1,12 +1,8 @@
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
-interface IButtonProps {
-  onClick?: () => void;
-  className?: string;
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  type?: "submit" | "reset" | "button";
-  disabled?: boolean;
 }
 
 const Button = ({
@@ -15,6 +11,7 @@ const Button = ({
   className,
   type = "button",
   disabled,
+  ...props
 }: IButtonProps) => {
   return (
     <button
@@ -22,6 +19,7 @@ const Button = ({
       onClick={onClick}
       type={type}
       disabled={disabled}
+      {...props}
     >
       {children}
     </button>

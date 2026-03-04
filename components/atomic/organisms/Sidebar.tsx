@@ -1,19 +1,20 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-import CategoriesList from "./CategoriesList";
+import { ItemCategory, ItemCity } from "@/types";
 import Filters from "./Filters";
 
 interface ISidebarProps {
   className?: string;
+  categories?: ItemCategory[];
+  cities?: ItemCity[];
 }
 
-const Sidebar = ({ className }: ISidebarProps) => {
-  const pathname = usePathname();
-
-  const isHomeRoute = pathname === "/";
-
-  return <>{isHomeRoute ? <CategoriesList /> : <Filters />}</>;
+const Sidebar = ({
+  className,
+  categories = [],
+  cities = [],
+}: ISidebarProps) => {
+  return (
+    <Filters className={className} categories={categories} cities={cities} />
+  );
 };
 
 export default Sidebar;
