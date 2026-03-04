@@ -54,6 +54,7 @@ export interface ItemOwner {
   firstName: string;
   familyName: string;
   email: string;
+  location: string;
 }
 
 export interface ItemDetail {
@@ -76,6 +77,19 @@ export interface ItemDetail {
   createdAt: string;
   updatedAt: string;
   owner: ItemOwner;
+  relatedItems: relatedItems[];
+}
+
+export interface relatedItems {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  mainImage: string;
+  sellingPrice: string;
+  lendingPrice: string;
+  lendingUnit: string;
+  itemType: string;
 }
 
 export interface ProductDetail {

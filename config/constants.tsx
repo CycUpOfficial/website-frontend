@@ -1,4 +1,10 @@
-import { AlertSvg, NewItemSvg, NotifSvg, StoreSvg } from "@/components/icons";
+import {
+  AlertSvg,
+  NewItemSvg,
+  NotifSvg,
+  StartChatSVG,
+  StoreSvg,
+} from "@/components/icons";
 
 export const safetyTips = [
   "Always meet the donor/seller at a safe public place For purchased items",
@@ -94,6 +100,11 @@ export const NOTIFICATION_TYPES = {
 
 export const profileItems = [
   { href: "/profile/listings", label: "My listings", icon: <StoreSvg /> },
+  {
+    href: "/profile/conversation",
+    label: "Conversations",
+    icon: <StartChatSVG />,
+  },
   {
     href: "/profile/feedback",
     label: "Feedback & Ratings",

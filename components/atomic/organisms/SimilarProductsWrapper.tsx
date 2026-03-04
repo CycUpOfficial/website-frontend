@@ -1,13 +1,12 @@
-import { SampleProduct } from "@/types";
+import { relatedItems } from "@/types";
 import { Text } from "../atoms";
 import { ProductCard } from "../molecules";
 
 interface ISimilarProductsWrapperProps {
-  products: SampleProduct[];
+  products: relatedItems[];
 }
 
 const SimilarProductsWrapper = ({ products }: ISimilarProductsWrapperProps) => {
-  console.log("🚀 ~ SimilarProductsWrapper ~ products:", products);
   return (
     <section>
       <Text type="h2" className="text-textPrimary font-normal text-[32px]">
@@ -22,10 +21,10 @@ const SimilarProductsWrapper = ({ products }: ISimilarProductsWrapperProps) => {
               id={prod.id}
               title={prod.title}
               description={prod.description}
-              images={prod.images}
-              price={prod.price}
+              images={[{ alt: prod.mainImage, src: prod.mainImage }]}
+              price={+prod.lendingPrice || +prod.sellingPrice}
               location={prod.location}
-              slug={prod.slug}
+              slug={prod.id}
             />
           ))}
         </div>

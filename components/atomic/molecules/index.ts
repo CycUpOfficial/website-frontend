@@ -23,6 +23,9 @@ import ItemsTypeDropdown from "./ItemsTypeDropdown";
 import CatalogPagination from "./CatalogPagination";
 import FilterOptionGroup from "./FilterOptionGroup";
 import FilterPriceRange from "./FilterPriceRange";
+import ConversationListItem from "./ConversationListItem";
+import ChatMessageBubble from "./ChatMessageBubble";
+import ChatMessageComposer from "./ChatMessageComposer";
 
 export {
   Logo,
@@ -50,6 +53,9 @@ export {
   CatalogPagination,
   FilterOptionGroup,
   FilterPriceRange,
+  ConversationListItem,
+  ChatMessageBubble,
+  ChatMessageComposer,
 };
 
 import type { ProductCardProps } from "./ProductCard";

@@ -16,6 +16,11 @@ const nextConfig: NextConfig = {
         pathname: "/uploads/**",
       },
     ],
+    localPatterns: [
+      {
+        pathname: "/api/image-proxy",
+      },
+    ],
   },
 };
 

@@ -18,9 +18,6 @@ const OwnerInfo = ({ owner }: IOwnerInfo) => {
       />
       <div className="flex flex-col justify-between items-start">
         <Text type="h3">{owner.username}</Text>
-        {/* <Text type="p" className="text-[10px] font-light">
-          {owner.university}
-        </Text>
         <div className="flex gap-[1.5px]">
           <Icon className="w-[9.2px] h-[10.5px] mt-[0.5px]">
             <LocationSVG width="100%" heigth="100%" isGrean />
@@ -28,7 +25,7 @@ const OwnerInfo = ({ owner }: IOwnerInfo) => {
           <Text type="span" className="text-primary text-[10px] font-light">
             {owner.location}
           </Text>
-        </div> */}
+        </div>
       </div>
     </div>
   );

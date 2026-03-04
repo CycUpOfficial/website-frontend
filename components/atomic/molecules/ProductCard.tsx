@@ -38,7 +38,7 @@ const ProductCard = ({
           className,
         )}
       >
-        <div className="relative w-[421px] h-[367px] rounded-[20px]">
+        <div className="relative w-[386px] h-[367px] rounded-[20px] overflow-hidden">
           <NextImage
             src={toSafeImageSrc(images[0].src)}
             alt={images[0].alt}
