@@ -6,18 +6,25 @@ const defaultHeaders = {
   "Content-Type": "application/json",
 };
 
-export function buildQuery(
-  params?: Record<string, string | number | boolean | undefined | null>,
-) {
+export function buildQuery(params?: object) {
   if (!params) {
     return "";
   }
 
   const searchParams = new URLSearchParams();
-  Object.entries(params).forEach(([key, value]) => {
+  Object.entries(params as Record<string, unknown>).forEach(([key, value]) => {
     if (value === undefined || value === null) {
       return;
     }
+
+    if (
+      typeof value !== "string" &&
+      typeof value !== "number" &&
+      typeof value !== "boolean"
+    ) {
+      return;
+    }
+
     searchParams.set(key, String(value));
   });
 

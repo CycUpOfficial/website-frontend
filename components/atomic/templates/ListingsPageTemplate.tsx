@@ -16,66 +16,12 @@ interface ListingsPageTemplateProps {
   };
 }
 
-const mockListings: SampleProduct[] = [
-  {
-    id: "1",
-    slug: "vintage-chair",
-    title: "Vintage Chair",
-    description: "Comfortable and clean vintage chair.",
-    images: [{ src: "/placeholder.svg", alt: "Vintage chair" }],
-    price: 45,
-    location: "Downtown",
-    owner: {
-      username: "You",
-      profilePic: "/placeholder.svg",
-      university: "Local University",
-      location: "Downtown",
-    },
-  },
-  {
-    id: "2",
-    slug: "desk-lamp",
-    title: "Desk Lamp",
-    description: "Bright LED desk lamp.",
-    images: [{ src: "/placeholder.svg", alt: "Desk lamp" }],
-    price: 15,
-    location: "Midtown",
-    owner: {
-      username: "You",
-      profilePic: "/placeholder.svg",
-      university: "Local University",
-      location: "Midtown",
-    },
-  },
-  {
-    id: "3",
-    slug: "book-shelf",
-    title: "Bookshelf",
-    description: "Sturdy wooden bookshelf.",
-    images: [{ src: "/placeholder.svg", alt: "Bookshelf" }],
-    price: 0,
-    location: "Uptown",
-    owner: {
-      username: "You",
-      profilePic: "/placeholder.svg",
-      university: "Local University",
-      location: "Uptown",
-    },
-  },
-];
-
-const mockStats = {
-  donated: 1,
-  posted: 1,
-  sold: 1,
-};
-
 const ListingsPageTemplate = ({
   listings,
   stats,
 }: ListingsPageTemplateProps) => {
-  const items = listings?.length ? listings : mockListings;
-  const counts = stats ?? mockStats;
+  const items = listings ?? [];
+  const counts = stats ?? { donated: 0, posted: 0, sold: 0 };
   const handlerStats = useMemo(
     () => [
       { label: "Donated", value: counts.donated },

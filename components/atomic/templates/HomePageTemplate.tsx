@@ -1,5 +1,6 @@
-import { SampleProduct } from "@/types";
+import { ItemCategory, ItemCity, SampleProduct } from "@/types";
 import { Text } from "../atoms";
+import { CatalogPagination, ItemsTypeDropdown } from "../molecules";
 import {
   Sidebar,
   HeroSearchSection,
@@ -12,33 +13,57 @@ interface IHomePageTemplate {
   title?: string;
   description?: string;
   products: SampleProduct[];
-  columns?: number;
+  categories: ItemCategory[];
+  cities: ItemCity[];
+  currentPage: number;
+  totalPages: number;
+  showHeroSearchSection?: boolean;
+  columns?: IProductListingGridProps["columns"];
   gap?: IProductListingGridProps["gap"];
   className?: string;
 }
 
-const HomePageTemplate = ({ products, columns, gap }: IHomePageTemplate) => {
+const HomePageTemplate = ({
+  products,
+  categories,
+  cities,
+  currentPage,
+  totalPages,
+  showHeroSearchSection = true,
+  columns,
+  gap,
+}: IHomePageTemplate) => {
   return (
     <>
-      <HeroSearchSection />
+      {showHeroSearchSection && <HeroSearchSection />}
 
       <Container>
-        <section className="px-20 my-12 flex justify-between gap-20">
-          <Sidebar />
+        <section className="px-20 my-12 flex gap-20">
+          <Sidebar categories={categories} cities={cities} />
           <div className="flex flex-col gap-y-6">
             <div className="flex gap-2 items-center justify-between w-fit">
               <Text type="h1" className="font-medium text-xl text-textPrimary">
                 Available Products
               </Text>
-              <span className="px-2 bg-secondary text-white text-sm rounded-[5px]">
-                Type
-              </span>
+              <ItemsTypeDropdown />
             </div>
-            <ProductListingGrid
-              products={products}
-              columns={columns}
-              gap={gap}
-            />
+            {products.length ? (
+              <>
+                <ProductListingGrid
+                  products={products}
+                  columns={columns}
+                  gap={gap}
+                />
+                <CatalogPagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                />
+              </>
+            ) : (
+              <Text type="p" className="text-sm text-textSecondary">
+                No items found for the selected filters.
+              </Text>
+            )}
           </div>
         </section>
       </Container>

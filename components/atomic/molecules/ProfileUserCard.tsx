@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
-import { SettingsSVG } from "@/components/icons";
+import { ArrowDownSVG, SettingsSVG } from "@/components/icons";
 import { Button, Icon, Image, Text } from "../atoms";
 import ProfileSidebarCard from "./ProfileSidebarCard";
 
@@ -10,6 +10,7 @@ interface ProfileUserCardProps {
   phoneNumber?: string;
   profileImage?: string;
   className?: string;
+  isProfileRoute?: boolean;
 }
 
 const ProfileUserCard = ({
@@ -17,21 +18,48 @@ const ProfileUserCard = ({
   phoneNumber = "Phone number",
   profileImage = "/placeholder.svg",
   className,
+  isProfileRoute,
 }: ProfileUserCardProps) => {
   return (
     <ProfileSidebarCard
       className={cn("h-[410px] items-center justify-center", className)}
     >
-      <Link
-        href="/profile/settings"
-        className="absolute right-4 top-4 flex items-center gap-1.5"
-        aria-label="Open settings"
-      >
-        <Icon>
-          <SettingsSVG />
-        </Icon>
-        <Button className="text-xs font-medium text-black">Settings</Button>
-      </Link>
+      {!isProfileRoute ? (
+        <div className="flex absolute top-5 w-full px-10 justify-between items-center">
+          <Link
+            href="/profile"
+            className="flex items-center gap-4 underline"
+            aria-label="Open settings"
+          >
+            <Icon className="rotate-90">
+              <ArrowDownSVG />
+            </Icon>
+            <Button className="text-md font-medium text-black">Profile</Button>
+          </Link>
+          <Link
+            href="/profile/settings"
+            className="flex items-center gap-1.5"
+            aria-label="Open settings"
+          >
+            <Icon>
+              <SettingsSVG />
+            </Icon>
+            <Button className="text-xs font-medium text-black">Settings</Button>
+          </Link>
+        </div>
+      ) : (
+        <Link
+          href="/profile/settings"
+          className="absolute right-4 top-4 flex items-center gap-1.5"
+          aria-label="Open settings"
+        >
+          <Icon>
+            <SettingsSVG />
+          </Icon>
+          <Button className="text-xs font-medium text-black">Settings</Button>
+        </Link>
+      )}
+
       <div className="h-[100px] w-[100px]">
         <Image src={profileImage} alt="Profile" aspectRatio="square" />
       </div>

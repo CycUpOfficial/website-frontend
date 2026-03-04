@@ -1,4 +1,5 @@
-import { SaveSearch, Searchbar } from "../molecules";
+import { Searchbar } from "../molecules";
+import SavedSearchManager from "./SavedSearchManager";
 
 const HeroSearchSection = () => {
   return (
@@ -9,7 +10,7 @@ const HeroSearchSection = () => {
         </h3>
         <div className="flex gap-4 items-center">
           <Searchbar isHeader={false} placeholder="Search here..." />
-          <SaveSearch />
+          <SavedSearchManager />
         </div>
       </div>
     </section>

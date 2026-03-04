@@ -7,18 +7,17 @@ import { SearchParamValue } from "@/lib/utils";
 import { getCategories, getCities, searchItems } from "@/services";
 import { ItemCategory, ItemCity } from "@/types";
 
-interface HomePageProps {
+interface SearchPageProps {
   searchParams: Promise<Record<string, SearchParamValue>>;
 }
 
-export default async function Home({ searchParams }: HomePageProps) {
+export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = await searchParams;
   const { query, currentPage } = buildSearchItemsQuery(params);
 
   const [itemsResponse, categoriesResponse, citiesResponse] = await Promise.all(
     [searchItems(query), getCategories(), getCities()],
   );
-  console.log("🚀 ~ Home ~ itemsResponse:", itemsResponse.data.items[0]);
 
   const products = itemsResponse.success
     ? mapItemsToSampleProducts(itemsResponse.data.items)
@@ -46,6 +45,7 @@ export default async function Home({ searchParams }: HomePageProps) {
       cities={cities}
       currentPage={page}
       totalPages={totalPages}
+      showHeroSearchSection={false}
       columns={4}
       gap="md"
     />

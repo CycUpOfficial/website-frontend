@@ -9,6 +9,13 @@ import Select from "./Select";
 import FileInput from "./FileInput";
 import PhotoSlot from "./PhotoSlot";
 import Radio from "./Radio";
+import Toggle from "./Toggle";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./Accordion";
 
 export {
   Button,
@@ -22,4 +29,9 @@ export {
   FileInput,
   PhotoSlot,
   Radio,
+  Toggle,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
 };

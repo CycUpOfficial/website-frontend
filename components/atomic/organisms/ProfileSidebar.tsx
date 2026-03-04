@@ -34,6 +34,7 @@ const ProfileSidebar = ({
             username={username}
             phoneNumber={phoneNumber}
             profileImage={profileImage}
+            isProfileRoute={isProfileRoute}
           />
           {isProfileRoute && (
             <ProfileSidebarCard className="h-[395px] justify-center items-center">

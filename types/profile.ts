@@ -103,3 +103,28 @@ export interface NotificationsQuery {
   page?: number;
   limit?: number;
 }
+
+export interface SavedSearch {
+  id: number;
+  searchTerms: string[];
+  email?: boolean;
+  in_app?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  [key: string]: unknown;
+}
+
+export interface SavedSearchesResponse {
+  savedSearches: SavedSearch[];
+}
+
+export interface CreateSavedSearchRequest {
+  searchTerms: string[];
+  email?: boolean;
+  in_app?: boolean;
+}
+
+export interface UpdateSavedSearchRequest {
+  email?: boolean;
+  in_app?: boolean;
+}

@@ -7,10 +7,16 @@ import { buildQuery, requestJson } from "./request";
 
 export async function getNotifications(
   query?: NotificationsQuery,
+  options?: RequestInit,
 ): Promise<ApiResponse<NotificationsResponse>> {
   const search = buildQuery(query);
   return requestJson<NotificationsResponse>(`/notifications${search}`, {
     method: "GET",
+    cache: "no-store",
+    ...(options ?? {}),
+    headers: {
+      ...(options?.headers ?? {}),
+    },
   });
 }
 

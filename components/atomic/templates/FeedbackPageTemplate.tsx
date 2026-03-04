@@ -1,7 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
-
 import { DashboardRating } from "@/types";
 import { ProfileCommonWrapper } from "../organisms";
 import FeedbacksWrapper from "../organisms/FeedbacksWrapper";
@@ -9,64 +7,26 @@ import { Text } from "../atoms";
 
 interface FeedbackPageTemplateProps {
   feedbacks?: DashboardRating[];
+  totalRatings?: number;
+  overallRating?: number;
 }
 
-const mockFeedbacks: DashboardRating[] = [
-  {
-    id: 1,
-    rating: 4,
-    comment: "Great seller, item was exactly as described.",
-    reviewer: "Nora",
-    createdAt: "2026-02-23T10:15:00Z",
-  },
-  {
-    id: 2,
-    rating: 5,
-    comment: "Smooth transaction and fast response.",
-    reviewer: "Liam",
-    createdAt: "2026-02-20T14:05:00Z",
-  },
-  {
-    id: 3,
-    rating: 3,
-    comment: "Item was good, but pickup took longer than expected.",
-    reviewer: "Maya",
-    createdAt: "2026-02-18T09:30:00Z",
-  },
-  {
-    id: 3,
-    rating: 3,
-    comment: "Item was good, but pickup took longer than expected.",
-    reviewer: "Maya",
-    createdAt: "2026-02-18T09:30:00Z",
-  },
-  {
-    id: 3,
-    rating: 3,
-    comment: "Item was good, but pickup took longer than expected.",
-    reviewer: "Maya",
-    createdAt: "2026-02-18T09:30:00Z",
-  },
-  {
-    id: 3,
-    rating: 3,
-    comment: "Item was good, but pickup took longer than expected.",
-    reviewer: "Maya",
-    createdAt: "2026-02-18T09:30:00Z",
-  },
-];
-
-const FeedbackPageTemplate = ({ feedbacks }: FeedbackPageTemplateProps) => {
-  const items = feedbacks?.length ? feedbacks : mockFeedbacks;
-  const totalRatings = items.length;
-  const overallRating = useMemo(() => {
-    if (!items.length) {
-      return 0;
-    }
-
-    const total = items.reduce((sum, item) => sum + item.rating, 0);
-    return Number((total / items.length).toFixed(1));
-  }, [items]);
+const FeedbackPageTemplate = ({
+  feedbacks,
+  totalRatings,
+  overallRating,
+}: FeedbackPageTemplateProps) => {
+  const items = feedbacks ?? [];
+  const ratingsCount = totalRatings ?? items.length;
+  const averageRating =
+    overallRating ??
+    (items.length
+      ? Number(
+          (
+            items.reduce((sum, item) => sum + item.rating, 0) / items.length
+          ).toFixed(1),
+        )
+      : 0);
 
   return (
     <section className="h-[640px] overflow-hidden rounded-[15px] bg-white">
@@ -78,10 +38,10 @@ const FeedbackPageTemplate = ({ feedbacks }: FeedbackPageTemplateProps) => {
         handlers={
           <div className="flex items-center gap-4">
             <Text type="span" className="text-sm text-textSecondary">
-              {totalRatings} reviews
+              {ratingsCount} reviews
             </Text>
             <Text type="span" className="text-sm text-textSecondary">
-              Overall {overallRating}/5
+              Overall {averageRating}/5
             </Text>
           </div>
         }

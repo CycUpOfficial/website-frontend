@@ -19,6 +19,10 @@ import ProfileSidebarCard from "./ProfileSidebarCard";
 import ProfileUserCard from "./ProfileUserCard";
 import NotificationItemCard from "./NotificationItemCard";
 import FeedbackItemCard from "./FeedbackItemCard";
+import ItemsTypeDropdown from "./ItemsTypeDropdown";
+import CatalogPagination from "./CatalogPagination";
+import FilterOptionGroup from "./FilterOptionGroup";
+import FilterPriceRange from "./FilterPriceRange";
 
 export {
   Logo,
@@ -42,8 +46,13 @@ export {
   ProfileUserCard,
   NotificationItemCard,
   FeedbackItemCard,
+  ItemsTypeDropdown,
+  CatalogPagination,
+  FilterOptionGroup,
+  FilterPriceRange,
 };
 
 import type { ProductCardProps } from "./ProductCard";
+import type { FilterOption } from "./FilterOptionGroup";
 
-export type { ProductCardProps };
+export type { ProductCardProps, FilterOption };

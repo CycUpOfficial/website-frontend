@@ -4,7 +4,7 @@ const ProfileSVG = (props: any) => (
     width={40}
     height={40}
     fill="none"
-    // viewBox="0 0 40 40"
+    viewBox="0 0 40 40"
     {...props}
   >
     <g filter="url(#a)">

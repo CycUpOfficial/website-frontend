@@ -1,6 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { Icon } from "../atoms";
 import { cn } from "@/lib/utils";
@@ -22,7 +24,14 @@ const Modal = ({
   contentClassName,
   showCloseButton = true,
 }: ModalProps) => {
-  if (!isOpen) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  if (!isOpen || !mounted) {
     return null;
   }
 
@@ -32,7 +41,7 @@ const Modal = ({
     }
   };
 
-  return (
+  return createPortal(
     <div
       className={cn(
         "fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-4",
@@ -60,7 +69,8 @@ const Modal = ({
         )}
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 

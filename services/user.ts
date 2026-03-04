@@ -5,11 +5,15 @@ import type {
 } from "@/types";
 import { requestJson } from "./request";
 
-export async function getCurrentUserProfile(): Promise<
-  ApiResponse<UserProfile>
-> {
+export async function getCurrentUserProfile(
+  options?: RequestInit,
+): Promise<ApiResponse<UserProfile>> {
   return requestJson<UserProfile>("/users/profile", {
     method: "GET",
+    ...(options ?? {}),
+    headers: {
+      ...(options?.headers ?? {}),
+    },
   });
 }
 

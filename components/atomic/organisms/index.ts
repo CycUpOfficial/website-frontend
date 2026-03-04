@@ -22,6 +22,8 @@ import ProfileCommonWrapper from "./ProfileCommonWrapper";
 import NotificationsWrapper from "./NotificationsWrapper";
 import FeedbacksWrapper from "./FeedbacksWrapper";
 import ListingsWrapper from "./ListingsWrapper";
+import ProfileSettingsForm from "./ProfileSettingsForm";
+import SavedSearchManager from "./SavedSearchManager";
 
 export {
   Header,
@@ -48,6 +50,8 @@ export {
   NotificationsWrapper,
   FeedbacksWrapper,
   ListingsWrapper,
+  ProfileSettingsForm,
+  SavedSearchManager,
 };
 
 import type { IMasonryGridProps } from "./MasonryGrid";

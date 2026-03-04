@@ -1,6 +1,7 @@
 import { Container, ProfileSidebar } from "@/components/atomic/organisms";
 import { cn } from "@/lib/utils";
 import { getCurrentUserProfile } from "@/services";
+import { cookies } from "next/headers";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -10,7 +11,10 @@ async function getProfileUser() {
   }
 
   try {
-    const response = await getCurrentUserProfile();
+    const cookieHeader = (await cookies()).toString();
+    const response = await getCurrentUserProfile({
+      headers: cookieHeader ? { cookie: cookieHeader } : undefined,
+    });
     if (!response.success) {
       return null;
     }
