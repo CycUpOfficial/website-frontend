@@ -70,14 +70,19 @@ const ChatMessageComposer = ({ onSend }: ChatMessageComposerProps) => {
         fileInputRef.current.value = "";
       }
     } catch (sendError) {
-      setError(sendError instanceof Error ? sendError.message : "Failed to send.");
+      setError(
+        sendError instanceof Error ? sendError.message : "Failed to send.",
+      );
     } finally {
       setIsSending(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 border-t px-6 py-4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-3 border-t px-6 py-4"
+    >
       <div className="flex items-center gap-2">
         <Input
           value={text}

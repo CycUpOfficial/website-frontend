@@ -52,7 +52,10 @@ function normalizeChat(chat: ChatWithMongoId): Chat {
   const id = chat.id || chat._id;
 
   if (!id) {
-    throw new ChatLogicError("Chat id is missing from server response.", "INVALID_CHAT");
+    throw new ChatLogicError(
+      "Chat id is missing from server response.",
+      "INVALID_CHAT",
+    );
   }
 
   return {
@@ -132,7 +135,9 @@ export class ChatLogic {
       );
     }
 
-    const normalizedChats = normalizeChats(response.data.chats as ChatWithMongoId[]);
+    const normalizedChats = normalizeChats(
+      response.data.chats as ChatWithMongoId[],
+    );
     chatStateManager.replaceChats(normalizedChats);
     return {
       ...response.data,

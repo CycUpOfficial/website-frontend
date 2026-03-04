@@ -11,7 +11,11 @@ import {
 import { getAuthSession } from "@/lib/auth-session";
 import { chatLogic } from "@/lib/chat/chat-logic";
 import type { Chat, Message } from "@/types";
-import { ProfileCommonWrapper, ConversationsList, ConversationThread } from "../organisms";
+import {
+  ProfileCommonWrapper,
+  ConversationsList,
+  ConversationThread,
+} from "../organisms";
 import { Text } from "../atoms";
 
 interface ConversationDetailPageTemplateProps {
@@ -169,10 +173,7 @@ const ConversationDetailPageTemplate = ({
       >
         <div className="grid h-full grid-cols-1 gap-4 lg:grid-cols-[320px_1fr]">
           <div className="h-full overflow-y-auto rounded-[14px] border border-textSecondary/20 bg-slate-50 p-3">
-            <ConversationsList
-              chats={chats}
-              activeChatId={chatId}
-            />
+            <ConversationsList chats={chats} activeChatId={chatId} />
           </div>
 
           <ConversationThread
