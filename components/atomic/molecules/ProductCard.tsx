@@ -5,6 +5,7 @@ import Price from "./Price";
 import Link from "next/link";
 import { IProductImages } from "@/types";
 import NextImage from "next/image";
+import { toSafeImageSrc } from "@/lib/image";
 
 export interface ProductCardProps {
   id: string;
@@ -39,7 +40,7 @@ const ProductCard = ({
       >
         <div className="relative w-[421px] h-[367px] rounded-[20px]">
           <NextImage
-            src={images[0].src}
+            src={toSafeImageSrc(images[0].src)}
             alt={images[0].alt}
             fill
             className="rounded-[20px] object-cover"

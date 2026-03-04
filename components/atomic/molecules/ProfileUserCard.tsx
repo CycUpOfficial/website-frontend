@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
-import { ArrowDownSVG, SettingsSVG } from "@/components/icons";
-import { Button, Icon, Image, Text } from "../atoms";
+import { ArrowDownSVG, ProfileSVG, SettingsSVG } from "@/components/icons";
+import { Button, Icon, Text } from "../atoms";
 import ProfileSidebarCard from "./ProfileSidebarCard";
 
 interface ProfileUserCardProps {
@@ -16,7 +16,7 @@ interface ProfileUserCardProps {
 const ProfileUserCard = ({
   username = "Username",
   phoneNumber = "Phone number",
-  profileImage = "/placeholder.svg",
+  profileImage,
   className,
   isProfileRoute,
 }: ProfileUserCardProps) => {
@@ -60,8 +60,16 @@ const ProfileUserCard = ({
         </Link>
       )}
 
-      <div className="h-[100px] w-[100px]">
-        <Image src={profileImage} alt="Profile" aspectRatio="square" />
+      <div className="flex h-[100px] w-[100px] items-center justify-center overflow-hidden rounded-full border border-textSecondary/20 bg-primary">
+        {profileImage ? (
+          <img
+            src={profileImage}
+            alt="Profile"
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <ProfileSVG width={56} height={56} />
+        )}
       </div>
       <Text
         type="h3"

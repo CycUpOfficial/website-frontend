@@ -19,6 +19,7 @@ export interface UserProfile {
 }
 
 export interface UpdateUserProfileRequest {
+  username: string;
   firstName: string;
   familyName: string;
   address: string;
@@ -39,13 +40,24 @@ export interface DashboardAnalytics {
 export type DashboardItemStatus = "published" | "deleted" | "expired" | "sold";
 
 export interface DashboardItem {
-  id: number;
-  status: DashboardItemStatus;
-  title?: string;
-  price?: number;
-  createdAt?: string;
-  updatedAt?: string;
-  [key: string]: unknown;
+  id: string;
+  title: string;
+  categoryId: string;
+  category: string;
+  brandName: string;
+  condition: string;
+  description: string;
+  address: string;
+  cityId: string;
+  city: string;
+  itemType: string;
+  sellingPrice: string;
+  lendingPrice: string;
+  rentUnit: string;
+  photos: { url: string; isMain: boolean }[];
+  status: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface DashboardItemsResponse {
@@ -116,6 +128,16 @@ export interface SavedSearch {
 
 export interface SavedSearchesResponse {
   savedSearches: SavedSearch[];
+}
+
+export interface ProfileListingItem {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  priceType: "selling" | "lending" | "unknown";
+  imageSrc: string;
+  status: DashboardItemStatus;
 }
 
 export interface CreateSavedSearchRequest {

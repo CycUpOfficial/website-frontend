@@ -24,6 +24,7 @@ import FeedbacksWrapper from "./FeedbacksWrapper";
 import ListingsWrapper from "./ListingsWrapper";
 import ProfileSettingsForm from "./ProfileSettingsForm";
 import SavedSearchManager from "./SavedSearchManager";
+import NewItemForm from "./NewItemForm";
 
 export {
   Header,
@@ -52,6 +53,7 @@ export {
   ListingsWrapper,
   ProfileSettingsForm,
   SavedSearchManager,
+  NewItemForm,
 };
 
 import type { IMasonryGridProps } from "./MasonryGrid";

@@ -1,3 +1,5 @@
-import { createPostItem } from "./product/post-item";
+import { createPostItem } from "./product/create-post-item";
+import { updatePostItem } from "./product/update-post-item";
 
-export { createPostItem };
+export { createPostItem, updatePostItem };
+export type { FormState } from "./product/post-item.shared";

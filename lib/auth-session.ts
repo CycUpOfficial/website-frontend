@@ -4,6 +4,16 @@ export interface AuthSession {
 }
 
 const STORAGE_KEY = "cycup_auth_session";
+const AUTH_COOKIE_NAME = "auth_token";
+
+function clearAuthCookie() {
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  document.cookie = `${AUTH_COOKIE_NAME}=; Max-Age=0; path=/`;
+  document.cookie = `${AUTH_COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+}
 
 export function getAuthSession(): AuthSession | null {
   if (typeof window === "undefined") {
@@ -36,5 +46,6 @@ export function clearAuthSession() {
   }
 
   window.localStorage.removeItem(STORAGE_KEY);
+  clearAuthCookie();
   window.dispatchEvent(new Event("auth-session-changed"));
 }

@@ -63,8 +63,14 @@ export async function confirmPasswordReset(
   });
 }
 
-export async function getCurrentUser(): Promise<ApiResponse<CurrentUser>> {
+export async function getCurrentUser(
+  options?: RequestInit,
+): Promise<ApiResponse<CurrentUser>> {
   return requestJson<CurrentUser>("/auth/me", {
     method: "GET",
+    ...(options ?? {}),
+    headers: {
+      ...(options?.headers ?? {}),
+    },
   });
 }

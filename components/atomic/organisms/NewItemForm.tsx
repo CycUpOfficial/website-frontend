@@ -3,8 +3,9 @@
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 
-import { createPostItem } from "@/actions";
+import { createPostItem, type FormState, updatePostItem } from "@/actions";
 import { cn } from "@/lib/utils";
+import { ItemCategory, ItemCity } from "@/types";
 
 import { FormCard, FormField } from "../molecules";
 import { Button, Input, Select, Textarea } from "../atoms";
@@ -13,11 +14,18 @@ import PostPurposeSection from "./PostPurposeSection";
 
 interface INewItemFormProps {
   type: "donate" | "post";
+  mode?: "create" | "edit";
+  itemId?: string;
+  initialValues?: Record<string, string | undefined>;
+  categories?: ItemCategory[];
+  cities?: ItemCity[];
   className?: string;
 }
 
-const SubmitButton = () => {
+const SubmitButton = ({ mode }: { mode: "create" | "edit" }) => {
   const { pending } = useFormStatus();
+  const defaultLabel = mode === "edit" ? "Save Changes" : "Post Item";
+  const pendingLabel = mode === "edit" ? "Saving..." : "Posting...";
 
   return (
     <Button
@@ -25,24 +33,56 @@ const SubmitButton = () => {
       disabled={pending}
       className="w-full flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 disabled:opacity-50"
     >
-      {pending ? "Posting..." : "Post Item"}
+      {pending ? pendingLabel : defaultLabel}
     </Button>
   );
 };
 
-const NewItemForm = ({ type, className }: INewItemFormProps) => {
-  const [state, formAction] = useActionState(createPostItem, null);
+const NewItemForm = ({
+  type,
+  mode = "create",
+  itemId,
+  initialValues,
+  categories = [],
+  cities = [],
+  className,
+}: INewItemFormProps) => {
+  const actionHandler: (
+    state: FormState,
+    payload: FormData,
+  ) => Promise<FormState> =
+    mode === "edit" && itemId
+      ? updatePostItem.bind(null, itemId)
+      : createPostItem;
+
+  const [state, formAction] = useActionState(actionHandler, null);
   const [, setPhotoFiles] = useState<File[]>([]);
+  const values = state?.values ?? initialValues;
   const purposeDefaultValue =
-    state?.values?.itemType === "selling" ||
-    state?.values?.itemType === "lending" ||
-    state?.values?.itemType === "giveaway"
-      ? state?.values?.itemType
+    values?.itemType === "selling" ||
+    values?.itemType === "lending" ||
+    values?.itemType === "giveaway"
+      ? values?.itemType
       : undefined;
+
+  const categoryOptions = categories.flatMap((category) => {
+    if (category.children?.length) {
+      return category.children.map((child) => ({
+        id: child.id,
+        label: `${category.name} / ${child.name}`,
+      }));
+    }
+
+    return [{ id: category.id, label: category.name }];
+  });
 
   return (
     <FormCard
-      title={`${type === "donate" ? "Donate" : "Post"} an Item`}
+      title={
+        mode === "edit"
+          ? "Edit Item"
+          : `${type === "donate" ? "Donate" : "Post"} an Item`
+      }
       message={state?.message}
       isSuccess={state?.success}
       action={formAction}
@@ -56,7 +96,7 @@ const NewItemForm = ({ type, className }: INewItemFormProps) => {
           placeholder="Title*"
           required
           maxLength={100}
-          defaultValue={state?.values?.title}
+          defaultValue={values?.title}
           hasError={!!state?.errors?.title}
         />
       </FormField>
@@ -72,11 +112,21 @@ const NewItemForm = ({ type, className }: INewItemFormProps) => {
             id="categoryId"
             name="categoryId"
             required
-            defaultValue={state?.values?.categoryId ?? ""}
+            defaultValue={values?.categoryId ?? ""}
             hasError={!!state?.errors?.categoryId}
           >
             <option value="">Category*</option>
-            <option value="1">Electronics</option>
+            {categoryOptions.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.label}
+              </option>
+            ))}
+            {values?.categoryId &&
+              !categoryOptions.some(
+                (option) => option.id === values.categoryId,
+              ) && (
+                <option value={values.categoryId}>{values.categoryId}</option>
+              )}
           </Select>
         </FormField>
 
@@ -90,7 +140,7 @@ const NewItemForm = ({ type, className }: INewItemFormProps) => {
             name="brandName"
             placeholder="Brand name*"
             required
-            defaultValue={state?.values?.brandName}
+            defaultValue={values?.brandName}
             hasError={!!state?.errors?.brandName}
           />
         </FormField>
@@ -102,7 +152,7 @@ const NewItemForm = ({ type, className }: INewItemFormProps) => {
           id="condition"
           name="condition"
           required
-          defaultValue={state?.values?.condition ?? ""}
+          defaultValue={values?.condition ?? ""}
           hasError={!!state?.errors?.condition}
         >
           <option value="">Condition*</option>
@@ -118,23 +168,31 @@ const NewItemForm = ({ type, className }: INewItemFormProps) => {
           name="address"
           placeholder="Address*"
           required
-          defaultValue={state?.values?.address}
+          defaultValue={values?.address}
           hasError={!!state?.errors?.address}
         />
       </FormField>
 
       {/* City */}
       <FormField htmlFor="cityId" required error={state?.errors?.cityId}>
-        <Input
+        <Select
           id="cityId"
           name="cityId"
-          type="number"
-          min="1"
-          placeholder="City ID*"
           required
-          defaultValue={state?.values?.cityId}
+          defaultValue={values?.cityId}
           hasError={!!state?.errors?.cityId}
-        />
+        >
+          <option value="">City*</option>
+          {cities.map((city) => (
+            <option key={city.id} value={city.id}>
+              {city.name}
+            </option>
+          ))}
+          {values?.cityId &&
+            !cities.some((city) => String(city.id) === values.cityId) && (
+              <option value={values.cityId}>{values.cityId}</option>
+            )}
+        </Select>
       </FormField>
 
       <PhotoUploadField
@@ -158,20 +216,20 @@ const NewItemForm = ({ type, className }: INewItemFormProps) => {
           name="description"
           placeholder="Description*"
           maxLength={1000}
-          defaultValue={state?.values?.description}
+          defaultValue={values?.description}
           hasError={!!state?.errors?.description}
         />
       </FormField>
 
       <PostPurposeSection
         errors={state?.errors}
-        values={state?.values}
+        values={values}
         defaultValue={purposeDefaultValue}
       />
 
       {/* Submit */}
       <div className="mt-8">
-        <SubmitButton />
+        <SubmitButton mode={mode} />
       </div>
     </FormCard>
   );

@@ -15,12 +15,14 @@ interface AuthModalProps {
   isOpen: boolean;
   initialView?: AuthView;
   onClose: () => void;
+  onLoginSuccess?: () => void;
 }
 
 const AuthModal = ({
   isOpen,
   initialView = "login",
   onClose,
+  onLoginSuccess,
 }: AuthModalProps) => {
   const [view, setView] = useState<AuthView>(initialView);
 
@@ -36,6 +38,7 @@ const AuthModal = ({
         <AuthLoginForm
           onForgotPassword={() => setView("forgot")}
           onRegister={() => setView("register")}
+          onSuccess={onLoginSuccess}
         />
       )}
       {view === "register" && (

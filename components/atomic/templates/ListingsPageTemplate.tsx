@@ -2,13 +2,13 @@
 
 import { useMemo } from "react";
 
-import { SampleProduct } from "@/types";
+import { ProfileListingItem } from "@/types";
 import { ProfileCommonWrapper } from "../organisms";
 import ListingsWrapper from "../organisms/ListingsWrapper";
 import { Text } from "../atoms";
 
 interface ListingsPageTemplateProps {
-  listings?: SampleProduct[];
+  listings?: ProfileListingItem[];
   stats?: {
     donated: number;
     posted: number;

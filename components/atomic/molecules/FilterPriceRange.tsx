@@ -1,6 +1,7 @@
 "use client";
 
 interface FilterPriceRangeProps {
+  priceMin: number;
   minPrice: number;
   maxPrice: number;
   priceMax: number;
@@ -10,6 +11,7 @@ interface FilterPriceRangeProps {
 }
 
 const FilterPriceRange = ({
+  priceMin,
   minPrice,
   maxPrice,
   priceMax,
@@ -17,8 +19,15 @@ const FilterPriceRange = ({
   onMaxChange,
   onCommit,
 }: FilterPriceRangeProps) => {
-  const rangeLeft = (minPrice / priceMax) * 100;
-  const rangeWidth = ((maxPrice - minPrice) / priceMax) * 100;
+  const priceSpan = Math.max(priceMax - priceMin, 1);
+  const rangeLeft = Math.max(
+    0,
+    Math.min(100, ((minPrice - priceMin) / priceSpan) * 100),
+  );
+  const rangeWidth = Math.max(
+    0,
+    Math.min(100 - rangeLeft, ((maxPrice - minPrice) / priceSpan) * 100),
+  );
 
   return (
     <div className="flex flex-col gap-3">
@@ -30,7 +39,7 @@ const FilterPriceRange = ({
         />
         <input
           type="range"
-          min={0}
+          min={priceMin}
           max={priceMax}
           step={10}
           value={minPrice}
@@ -41,7 +50,7 @@ const FilterPriceRange = ({
         />
         <input
           type="range"
-          min={0}
+          min={priceMin}
           max={priceMax}
           step={10}
           value={maxPrice}
@@ -55,19 +64,19 @@ const FilterPriceRange = ({
       <div className="flex gap-2">
         <input
           type="number"
-          min={0}
+          min={priceMin}
           max={maxPrice}
           value={minPrice}
           onChange={(event) => {
             const value = Number(event.currentTarget.value);
-            onMinChange(Number.isNaN(value) ? 0 : value);
+            onMinChange(Number.isNaN(value) ? priceMin : value);
           }}
           placeholder="Min"
           className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
         />
         <input
           type="number"
-          min={0}
+          min={priceMin}
           max={priceMax}
           value={maxPrice}
           onChange={(event) => {

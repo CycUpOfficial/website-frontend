@@ -1,6 +1,10 @@
 import { ListingsTemplate } from "@/components/atomic/templates";
 import { getUserAnalytics, getUserItems } from "@/services";
-import { DashboardItem, SampleProduct } from "@/types";
+import {
+  DashboardItem,
+  DashboardItemStatus,
+  ProfileListingItem,
+} from "@/types";
 import { cookies } from "next/headers";
 
 const LISTINGS_LIMIT = 20;
@@ -24,37 +28,49 @@ type DashboardListingSource = DashboardItem & {
   };
 };
 
-function mapItemsToSampleProducts(
-  items: DashboardItem[] = [],
-): SampleProduct[] {
+function toDashboardItemStatus(status: string): DashboardItemStatus {
+  if (
+    status === "published" ||
+    status === "deleted" ||
+    status === "expired" ||
+    status === "sold"
+  ) {
+    return status;
+  }
+
+  return "published";
+}
+
+function toNumber(value: string | number | undefined): number {
+  if (typeof value === "number") {
+    return value;
+  }
+
+  if (!value) {
+    return 0;
+  }
+
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function mapItemsToListings(items: DashboardItem[] = []): ProfileListingItem[] {
   return items.map((rawItem) => {
     const item = rawItem as DashboardListingSource;
-    const images = item.photos?.length
-      ? item.photos.map((photo) => ({
-          src: photo.url,
-          alt: `${item.title ?? "Item"} image`,
-        }))
-      : [{ src: "/winter-jacket.png", alt: `${item.title ?? "Item"} image` }];
-
-    const ownerName =
-      item.owner?.username ||
-      `${item.owner?.firstName ?? ""} ${item.owner?.familyName ?? ""}`.trim() ||
-      "seller";
+    const sellingPrice = toNumber(item.sellingPrice);
+    const lendingPrice = toNumber(item.lendingPrice);
+    const fallbackPrice = toNumber(item.price);
+    const priceType =
+      sellingPrice > 0 ? "selling" : lendingPrice > 0 ? "lending" : "unknown";
 
     return {
       id: String(item.id),
-      slug: item.slug ?? String(item.id),
       title: item.title ?? "Untitled item",
       description: item.description ?? "",
-      images,
-      price: +(item.sellingPrice ?? item.lendingPrice ?? item.price ?? 0),
-      location: item.city ?? item.address ?? "Unknown location",
-      owner: {
-        username: ownerName,
-        profilePic: item.owner?.profilePic ?? "/profiles/alex.png",
-        university: item.owner?.university ?? "",
-        location: item.owner?.location ?? item.city ?? "",
-      },
+      price: sellingPrice || lendingPrice || fallbackPrice,
+      priceType,
+      imageSrc: item.photos?.[0]?.url ?? "/winter-jacket.png",
+      status: toDashboardItemStatus(item.status),
     };
   });
 }
@@ -64,15 +80,16 @@ export default async function ListingsPage() {
   const authHeaders = cookieHeader ? { cookie: cookieHeader } : undefined;
 
   const [itemsResponse, analyticsResponse] = await Promise.all([
-    getUserItems(
-      { page: 1, limit: LISTINGS_LIMIT },
-      { headers: authHeaders },
-    ),
+    getUserItems({ page: 1, limit: LISTINGS_LIMIT }, { headers: authHeaders }),
     getUserAnalytics({ headers: authHeaders }),
   ]);
 
+  console.log(
+    "🚀 ~ ListingsPage ~ itemsResponse.data.items:",
+    itemsResponse.data.items[0].photos,
+  );
   const listings = itemsResponse.success
-    ? mapItemsToSampleProducts(itemsResponse.data.items)
+    ? mapItemsToListings(itemsResponse.data.items)
     : [];
 
   const stats = {

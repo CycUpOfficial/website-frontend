@@ -12,11 +12,13 @@ import { AuthFormCard, FormField } from "../molecules";
 interface AuthLoginFormProps {
   onForgotPassword?: () => void;
   onRegister?: () => void;
+  onSuccess?: () => void;
 }
 
 const AuthLoginForm = ({
   onForgotPassword,
   onRegister,
+  onSuccess,
 }: AuthLoginFormProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -36,6 +38,11 @@ const AuthLoginForm = ({
         authenticated: true,
         userId: response.data?.userId,
       });
+      if (onSuccess) {
+        onSuccess();
+        setIsSubmitting(false);
+        return;
+      }
       setIsSuccess(true);
       setMessage("Login successful.");
     } else {

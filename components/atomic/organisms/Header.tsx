@@ -25,6 +25,41 @@ const Header = ({ classname }: IHeaderProps) => {
 
   const isHomeRoute = pathname === "/";
 
+  const getSafeRedirectPath = () => {
+    const redirectTarget = searchParams.get("redirect");
+
+    if (
+      redirectTarget &&
+      redirectTarget.startsWith("/") &&
+      !redirectTarget.startsWith("//")
+    ) {
+      return redirectTarget;
+    }
+
+    return null;
+  };
+
+  const clearAuthParamsFromUrl = () => {
+    const nextParams = new URLSearchParams(searchParams.toString());
+    nextParams.delete("auth");
+    nextParams.delete("redirect");
+
+    const nextQuery = nextParams.toString();
+    router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname);
+  };
+
+  const handleLoginSuccess = () => {
+    setIsAuthOpen(false);
+
+    const redirectTarget = getSafeRedirectPath();
+    if (redirectTarget) {
+      router.push(redirectTarget);
+      return;
+    }
+
+    clearAuthParamsFromUrl();
+  };
+
   useEffect(() => {
     const requestedView = searchParams.get("auth");
     if (
@@ -94,6 +129,7 @@ const Header = ({ classname }: IHeaderProps) => {
         isOpen={isAuthOpen}
         initialView={authView}
         onClose={() => setIsAuthOpen(false)}
+        onLoginSuccess={handleLoginSuccess}
       />
     </header>
   );

@@ -1,4 +1,9 @@
-import { ItemSummary, SearchItemsQuery, SampleProduct } from "@/types";
+import {
+  ItemDetail,
+  ItemSummary,
+  SearchItemsQuery,
+  SampleProduct,
+} from "@/types";
 import {
   getQueryValue,
   parseNumber,
@@ -22,7 +27,7 @@ export function buildSearchItemsQuery(
 
   const query: SearchItemsQuery = {
     search: getQueryValue(params.search),
-    categoryId,
+    categoryId: categoryId !== undefined ? String(categoryId) : undefined,
     city: getQueryValue(params.city),
     itemType:
       itemType === "selling" ||
@@ -48,33 +53,69 @@ export function mapItemsToSampleProducts(
   items: ItemSummary[] = [],
 ): SampleProduct[] {
   return items.map((item) => {
-    const images = item.photos?.length
-      ? item.photos.map((photo: { url: string }) => ({
-          src: photo.url,
-          alt: `${item.title} image`,
-        }))
+    const images = item.mainImage
+      ? [{ src: item.mainImage, alt: `${item.title} image` }]
       : [{ src: "/winter-jacket.png", alt: `${item.title} image` }];
 
-    const price = item.sellingPrice ?? item.lendingPrice ?? item.price ?? 0;
-    const ownerName =
-      item.owner?.username ||
-      `${item.owner?.firstName ?? ""} ${item.owner?.familyName ?? ""}`.trim() ||
-      "seller";
+    const price =
+      item.itemType === "selling"
+        ? item.sellingPrice
+        : item.itemType === "lending"
+          ? item.lendingPrice
+          : 0;
 
     return {
       id: String(item.id),
-      slug: item.slug ?? String(item.id),
+      slug: String(item.id),
       title: item.title,
-      description: item.description ?? "",
+      description: "",
       images,
       price: +price,
-      location: item.city ?? item.address ?? "Unknown location",
+      location: item.city || "Unknown location",
       owner: {
-        username: ownerName,
-        profilePic: item.owner?.profilePic ?? "/profiles/alex.png",
-        university: item.owner?.university ?? "",
-        location: item.owner?.location ?? item.city ?? "",
+        username: "seller",
+        profilePic: "/profiles/alex.png",
+        university: "",
+        location: item.city || "",
       },
     };
   });
+}
+
+export function mapItemDetailToSampleProduct(item: ItemDetail): SampleProduct {
+  const mainPhoto = item.photos.find((photo) => photo.isMain);
+  const orderedPhotos = mainPhoto
+    ? [mainPhoto, ...item.photos.filter((photo) => !photo.isMain)]
+    : item.photos;
+
+  const images = orderedPhotos.length
+    ? orderedPhotos.map((photo) => ({
+        src: photo.url,
+        alt: `${item.title} image`,
+      }))
+    : [{ src: "/winter-jacket.png", alt: `${item.title} image` }];
+
+  const ownerName = `${item.owner.firstName} ${item.owner.familyName}`.trim();
+  const price =
+    item.itemType === "selling"
+      ? item.sellingPrice
+      : item.itemType === "lending"
+        ? item.lendingPrice
+        : 0;
+
+  return {
+    id: String(item.id),
+    slug: String(item.id),
+    title: item.title,
+    description: item.description,
+    images,
+    price: +price,
+    location: item.city || item.address || "Unknown location",
+    owner: {
+      username: ownerName || "seller",
+      profilePic: "/profiles/alex.png",
+      university: "",
+      location: item.city || "",
+    },
+  };
 }

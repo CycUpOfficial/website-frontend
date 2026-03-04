@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowDownSVG, BurgerSvg } from "@/components/icons";
-import { ItemCategory, ItemCity } from "@/types";
+import { ItemCategory, ItemCity, ItemProps } from "@/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -23,9 +23,11 @@ interface FiltersProps {
   className?: string;
   categories?: ItemCategory[];
   cities?: ItemCity[];
+  itemProps?: ItemProps;
 }
 
-const PRICE_MAX = 5000;
+const DEFAULT_PRICE_MIN = 0;
+const DEFAULT_PRICE_MAX = 5000;
 
 const parseNumber = (value: string | null): number | undefined => {
   if (!value) {
@@ -36,10 +38,23 @@ const parseNumber = (value: string | null): number | undefined => {
   return Number.isFinite(parsed) ? parsed : undefined;
 };
 
-const Filters = ({ className, categories = [], cities = [] }: FiltersProps) => {
+const Filters = ({
+  className,
+  categories = [],
+  cities = [],
+  itemProps,
+}: FiltersProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const priceMin = Number.isFinite(itemProps?.minPrice)
+    ? Math.max(0, itemProps!.minPrice)
+    : DEFAULT_PRICE_MIN;
+  const priceMaxCandidate = Number.isFinite(itemProps?.maxPrice)
+    ? Math.max(0, itemProps!.maxPrice)
+    : DEFAULT_PRICE_MAX;
+  const priceMax = Math.max(priceMin, priceMaxCandidate);
 
   const activeMinPrice = parseNumber(searchParams.get("minPrice"));
   const activeMaxPrice = parseNumber(searchParams.get("maxPrice"));
@@ -48,12 +63,12 @@ const Filters = ({ className, categories = [], cities = [] }: FiltersProps) => {
   const activeCondition = searchParams.get("condition") ?? "";
   const activeCity = searchParams.get("city") ?? "";
   const selectedMinForSlider = Math.max(
-    0,
-    Math.min(PRICE_MAX, activeMinPrice ?? 0),
+    priceMin,
+    Math.min(priceMax, activeMinPrice ?? priceMin),
   );
   const selectedMaxForSlider = Math.max(
-    0,
-    Math.min(PRICE_MAX, activeMaxPrice ?? PRICE_MAX),
+    priceMin,
+    Math.min(priceMax, activeMaxPrice ?? priceMax),
   );
 
   const initialMinForSlider = Math.min(
@@ -97,13 +112,19 @@ const Filters = ({ className, categories = [], cities = [] }: FiltersProps) => {
     if (min === undefined) {
       params.delete("minPrice");
     } else {
-      params.set("minPrice", String(Math.max(0, min)));
+      params.set(
+        "minPrice",
+        String(Math.max(priceMin, Math.min(priceMax, min))),
+      );
     }
 
     if (max === undefined) {
       params.delete("maxPrice");
     } else {
-      params.set("maxPrice", String(Math.max(0, max)));
+      params.set(
+        "maxPrice",
+        String(Math.max(priceMin, Math.min(priceMax, max))),
+      );
     }
 
     params.set("page", "1");
@@ -145,12 +166,12 @@ const Filters = ({ className, categories = [], cities = [] }: FiltersProps) => {
   };
 
   const handleMinRangeChange = (value: number) => {
-    const nextMin = Math.min(Math.max(0, value), maxPrice);
+    const nextMin = Math.min(Math.max(priceMin, value), maxPrice);
     setMinPrice(nextMin);
   };
 
   const handleMaxRangeChange = (value: number) => {
-    const nextMax = Math.max(Math.min(PRICE_MAX, value), minPrice);
+    const nextMax = Math.max(Math.min(priceMax, value), minPrice);
     setMaxPrice(nextMax);
   };
 
@@ -196,11 +217,7 @@ const Filters = ({ className, categories = [], cities = [] }: FiltersProps) => {
         </Text>
       </div>
 
-      <Accordion
-        type="single"
-        collapsible
-        className="flex flex-col gap-3"
-      >
+      <Accordion type="single" collapsible className="flex flex-col gap-3">
         <AccordionItem
           value="categories"
           className="border-b border-textSecondary/20 bg-white"
@@ -291,9 +308,10 @@ const Filters = ({ className, categories = [], cities = [] }: FiltersProps) => {
           </AccordionTrigger>
           <AccordionContent className="border-textSecondary/20 px-3 py-3">
             <FilterPriceRange
+              priceMin={priceMin}
               minPrice={minPrice}
               maxPrice={maxPrice}
-              priceMax={PRICE_MAX}
+              priceMax={priceMax}
               onMinChange={handleMinRangeChange}
               onMaxChange={handleMaxRangeChange}
               onCommit={applyPriceRange}

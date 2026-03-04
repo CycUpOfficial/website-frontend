@@ -18,11 +18,13 @@ export default async function Home({ searchParams }: HomePageProps) {
   const [itemsResponse, categoriesResponse, citiesResponse] = await Promise.all(
     [searchItems(query), getCategories(), getCities()],
   );
-  console.log("🚀 ~ Home ~ itemsResponse:", itemsResponse.data.items[0]);
 
   const products = itemsResponse.success
     ? mapItemsToSampleProducts(itemsResponse.data.items)
     : [];
+  const itemProps = itemsResponse.success
+    ? itemsResponse.data.props
+    : { minPrice: 0, maxPrice: 5000 };
   const totalPages = itemsResponse.success
     ? itemsResponse.data.pagination.totalPages
     : 1;
@@ -44,6 +46,7 @@ export default async function Home({ searchParams }: HomePageProps) {
       products={products}
       categories={categories}
       cities={cities}
+      itemProps={itemProps}
       currentPage={page}
       totalPages={totalPages}
       columns={4}

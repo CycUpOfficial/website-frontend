@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { toSafeImageSrc } from "@/lib/image";
 
 export interface ImageProps {
   src: string;
@@ -23,7 +24,7 @@ const Image = ({ src, alt, aspectRatio = "auto", className }: ImageProps) => {
       )}
     >
       <img
-        src={src || "/placeholder.svg"}
+        src={toSafeImageSrc(src)}
         alt={alt}
         className="h-auto w-full object-cover rounded-[20px]"
       />

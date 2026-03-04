@@ -20,9 +20,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased`}>
+      <body
+        className={`${poppins.className} antialiased min-h-screen flex flex-col`}
+      >
         <Header />
-        <main className="py-[80px] bg-gray-50">{children}</main>
+        <div className="h-[80px] shrink-0" aria-hidden />
+        <main className="flex-1 bg-gray-50">{children}</main>
         <Footer />
       </body>
     </html>

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Text } from "../atoms";
 
 interface IFormCarProps {
-  title: string;
+  title?: string;
   description?: string;
   message?: string; // Global success/error message
   isSuccess?: boolean;
@@ -23,11 +23,16 @@ const FormCard = ({
 }: IFormCarProps) => {
   return (
     <div className={cn("bg-white rounded-lg p-6 w-full mx-auto", className)}>
-      <div className="w-fill rounded-[15px] text-center bg-white flex justify-center shadow-md items-center mb-10">
-        <Text type="h1" className="text-2xl font-bold text-primary mb-6 w-fit">
-          {title}
-        </Text>
-      </div>
+      {title && (
+        <div className="w-fill rounded-[15px] text-center bg-white flex justify-center shadow-md items-center mb-10">
+          <Text
+            type="h1"
+            className="text-2xl font-bold text-primary mb-6 w-fit"
+          >
+            {title}
+          </Text>
+        </div>
+      )}
 
       {/* Standardized Message Display */}
       {message && (

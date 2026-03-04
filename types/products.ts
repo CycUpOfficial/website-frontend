@@ -32,28 +32,67 @@ export type ItemType = "selling" | "lending" | "giveaway";
 export type ItemCondition = "used" | "new";
 
 export interface ItemSummary {
-  id: string;
-  slug?: string;
+  id: number;
   title: string;
-  description?: string;
-  city?: string;
-  address?: string;
-  itemType?: ItemType;
-  condition?: ItemCondition;
-  sellingPrice?: number;
-  lendingPrice?: number;
-  price?: number;
-  photos?: {
-    url: string;
-    isMain?: boolean;
+  mainImage: string;
+  sellingPrice: number;
+  lendingPrice: number;
+  itemType: string;
+  rentUnit: string;
+  city: string;
+  createdAt: string;
+}
+
+export interface ItemPhoto {
+  url: string;
+  isMain: boolean;
+}
+
+export interface ItemOwner {
+  id: number;
+  firstName: string;
+  familyName: string;
+  email: string;
+}
+
+export interface ItemDetail {
+  id: string;
+  title: string;
+  categoryId: string;
+  category: string;
+  brandName: string;
+  condition: ItemCondition;
+  description: string;
+  address: string;
+  cityId: number;
+  city: string;
+  itemType: ItemType;
+  sellingPrice: number;
+  lendingPrice: number;
+  rentUnit: "month" | "week" | "day" | "hour";
+  photos: ItemPhoto[];
+  status: "published" | "pending";
+  createdAt: string;
+  updatedAt: string;
+  owner: ItemOwner;
+}
+
+export interface ProductDetail {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  images: {
+    src: string;
+    alt: string;
   }[];
-  owner?: {
-    username?: string;
-    firstName?: string;
-    familyName?: string;
-    profilePic?: string;
-    university?: string;
-    location?: string;
+  price: number;
+  location: string;
+  owner: {
+    username: string;
+    profilePic: string;
+    university: string;
+    location: string;
   };
 }
 
@@ -66,7 +105,7 @@ export interface ItemsPagination {
 
 export interface SearchItemsQuery {
   search?: string;
-  categoryId?: number;
+  categoryId?: string;
   city?: string;
   itemType?: ItemType;
   condition?: ItemCondition;
@@ -81,10 +120,21 @@ export interface SearchItemsQuery {
 export interface SearchItemsResponse {
   items: ItemSummary[];
   pagination: ItemsPagination;
+  props: ItemProps;
+}
+
+export interface ItemProps {
+  minPrice: number;
+  maxPrice: number;
 }
 
 export interface ItemCategory {
-  id: number;
+  id: string;
+  name: string;
+  children: CategoryChildren[];
+}
+export interface CategoryChildren {
+  id: string;
   name: string;
 }
 

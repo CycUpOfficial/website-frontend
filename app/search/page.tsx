@@ -22,6 +22,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const products = itemsResponse.success
     ? mapItemsToSampleProducts(itemsResponse.data.items)
     : [];
+  const itemProps = itemsResponse.success
+    ? itemsResponse.data.props
+    : { minPrice: 0, maxPrice: 5000 };
   const totalPages = itemsResponse.success
     ? itemsResponse.data.pagination.totalPages
     : 1;
@@ -43,6 +46,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       products={products}
       categories={categories}
       cities={cities}
+      itemProps={itemProps}
       currentPage={page}
       totalPages={totalPages}
       showHeroSearchSection={false}

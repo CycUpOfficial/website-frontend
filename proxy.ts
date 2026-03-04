@@ -3,7 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const isProtectedRoute = (pathname: string) => {
-  return pathname.startsWith("/profile") || pathname.startsWith("/product/new");
+  return (
+    pathname.startsWith("/profile") ||
+    pathname.startsWith("/product/new") ||
+    pathname.startsWith("/product/edit")
+  );
 };
 
 const buildLoginRedirect = (request: NextRequest) => {
@@ -52,5 +56,11 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/profile/:path*", "/product/new/:path*", "/product/new"],
+  matcher: [
+    "/profile/:path*",
+    "/product/new/:path*",
+    "/product/new",
+    "/product/edit/:path*",
+    "/product/edit",
+  ],
 };

@@ -1,10 +1,7 @@
 import { SelectHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-type SelectProps = Omit<
-  SelectHTMLAttributes<HTMLSelectElement>,
-  "value" | "onChange"
-> & {
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   hasError?: boolean;
 };
 

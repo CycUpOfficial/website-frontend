@@ -1,4 +1,4 @@
-import { ItemCategory, ItemCity, SampleProduct } from "@/types";
+import { ItemCategory, ItemCity, ItemProps, SampleProduct } from "@/types";
 import { Text } from "../atoms";
 import { CatalogPagination, ItemsTypeDropdown } from "../molecules";
 import {
@@ -15,6 +15,7 @@ interface IHomePageTemplate {
   products: SampleProduct[];
   categories: ItemCategory[];
   cities: ItemCity[];
+  itemProps?: ItemProps;
   currentPage: number;
   totalPages: number;
   showHeroSearchSection?: boolean;
@@ -27,6 +28,7 @@ const HomePageTemplate = ({
   products,
   categories,
   cities,
+  itemProps,
   currentPage,
   totalPages,
   showHeroSearchSection = true,
@@ -39,7 +41,11 @@ const HomePageTemplate = ({
 
       <Container>
         <section className="px-20 my-12 flex gap-20">
-          <Sidebar categories={categories} cities={cities} />
+          <Sidebar
+            categories={categories}
+            cities={cities}
+            itemProps={itemProps}
+          />
           <div className="flex flex-col gap-y-6">
             <div className="flex gap-2 items-center justify-between w-fit">
               <Text type="h1" className="font-medium text-xl text-textPrimary">
