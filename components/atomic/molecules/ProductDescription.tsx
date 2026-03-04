@@ -7,16 +7,16 @@ interface IProductDescriptionProps {
 
 const ProductDescription = ({ description }: IProductDescriptionProps) => {
   return (
-    <div className="rounded-[10px] bg-white p-12 shadow-md">
+    <div className="rounded-[10px] bg-white p-12 shadow-md mb-20">
       <Text type="p" className="mb-10">
         {description}
       </Text>
-      <Link
+      {/* <Link
         href="/"
         className="bg-secondary text-white text-xl rounded-[10px] font-medium py-1.5 px-8"
       >
         Claim
-      </Link>
+      </Link> */}
     </div>
   );
 };
