@@ -10,7 +10,6 @@ interface IProductImagesWrapperProps {
 }
 
 const ProductImagesWrapper = ({ imgs }: IProductImagesWrapperProps) => {
-  console.log("🚀 ~ ProductImagesWrapper ~ imgs:", imgs);
   return (
     <div className="flex flex-col bg-primary-1 rounded-[10px] gap-10">
       <div className="relative w-[770px] aspect-[770/528]">

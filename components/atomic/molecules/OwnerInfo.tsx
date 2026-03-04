@@ -2,9 +2,9 @@ import Image from "next/image";
 import { Icon, Text } from "../atoms";
 import { LocationSVG } from "@/components/icons";
 import PlaceholderImage from "@/public/profile-placeholder.jpg";
-import { IProductOwner } from "@/types";
+import { ItemOwner } from "@/types";
 interface IOwnerInfo {
-  owner: IProductOwner;
+  owner: ItemOwner;
 }
 const OwnerInfo = ({ owner }: IOwnerInfo) => {
   return (
@@ -18,7 +18,7 @@ const OwnerInfo = ({ owner }: IOwnerInfo) => {
       />
       <div className="flex flex-col justify-between items-start">
         <Text type="h3">{owner.username}</Text>
-        <Text type="p" className="text-[10px] font-light">
+        {/* <Text type="p" className="text-[10px] font-light">
           {owner.university}
         </Text>
         <div className="flex gap-[1.5px]">
@@ -28,7 +28,7 @@ const OwnerInfo = ({ owner }: IOwnerInfo) => {
           <Text type="span" className="text-primary text-[10px] font-light">
             {owner.location}
           </Text>
-        </div>
+        </div> */}
       </div>
     </div>
   );

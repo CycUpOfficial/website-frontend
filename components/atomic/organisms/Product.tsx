@@ -9,6 +9,7 @@ interface IProductProps {
   product: ItemDetail;
 }
 const Product = ({ product }: IProductProps) => {
+  console.log("🚀 ~ Product ~ product:", product);
   return (
     <section className="flex flex-col gap-8 mt-[80px]">
       <div className="flex gap-[70px] w-full justify-between items-stretch">

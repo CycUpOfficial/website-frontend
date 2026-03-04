@@ -49,7 +49,8 @@ export interface ItemPhoto {
 }
 
 export interface ItemOwner {
-  id: number;
+  id: string;
+  username: string;
   firstName: string;
   familyName: string;
   email: string;
@@ -116,7 +117,6 @@ export interface SearchItemsQuery {
   page?: number;
   limit?: number;
 }
-
 export interface SearchItemsResponse {
   items: ItemSummary[];
   pagination: ItemsPagination;

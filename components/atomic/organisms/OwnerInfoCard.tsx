@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Icon, Text } from "../atoms";
 import { StartChatSVG } from "@/components/icons";
 import { OwnerInfo } from "../molecules";
-import { IProductOwner } from "@/types";
+import { ItemOwner } from "@/types";
 
 interface IOwnerInfoCardProps {
-  owner: IProductOwner;
+  owner: ItemOwner;
 }
 
 const OwnerInfoCard = ({ owner }: IOwnerInfoCardProps) => {
